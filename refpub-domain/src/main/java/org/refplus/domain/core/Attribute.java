@@ -1,4 +1,4 @@
-package org.refplus.core;
+package org.refplus.domain.core;
 
 /**
  * 

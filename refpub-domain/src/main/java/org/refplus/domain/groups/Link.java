@@ -1,9 +1,10 @@
-package org.refplus.hierarchy;
+package org.refplus.domain.groups;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import org.refplus.core.Ro;
+import org.refplus.domain.core.Ro;
 
 /**
  * 
@@ -14,6 +15,7 @@ import org.refplus.core.Ro;
  *
  */
 @Data
+@AllArgsConstructor
 @EqualsAndHashCode
 public class Link {
 
