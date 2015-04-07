@@ -16,7 +16,7 @@ import org.refplus.domain.groups.Group;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Concept extends Ro {
+public class Concept extends RefDef {
 
 	/**
 	 * The instances of a concept, or in RefPlus terms, the reference objects of a concept.

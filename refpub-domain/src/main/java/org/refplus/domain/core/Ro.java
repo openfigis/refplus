@@ -1,7 +1,6 @@
 package org.refplus.domain.core;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,8 +15,8 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode
-public class Ro {
+@EqualsAndHashCode(callSuper = true)
+public class Ro extends RefDef {
 
 	public Ro(Code code, MultiLingualString mls) {
 		codeList = new ArrayList<Code>();
@@ -25,8 +24,5 @@ public class Ro {
 		multiLingualStringList = new ArrayList<MultiLingualString>();
 		multiLingualStringList.add(mls);
 	}
-
-	private List<Code> codeList;
-	private List<MultiLingualString> multiLingualStringList;
 
 }

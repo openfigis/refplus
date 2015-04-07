@@ -58,6 +58,7 @@ public class ConceptTest {
 
 		try {
 			CSVReader reader = new CSVReader(new FileReader(csvFileName));
+
 			reader.readNext();
 			String[] nextLine;
 			// Set<String> orderSet = new HashSet<String>();
