@@ -25,10 +25,10 @@ import org.refplus.domain.core.Ro;
 public class Link {
 
 	public Link(Ro destination) {
-		roSet = new HashSet<Ro>();
-		roSet.add(destination);
+		memberSet = new HashSet<Ro>();
+		memberSet.add(destination);
 	}
 
-	private Set<Ro> roSet;
+	private Set<Ro> memberSet;
 
 }

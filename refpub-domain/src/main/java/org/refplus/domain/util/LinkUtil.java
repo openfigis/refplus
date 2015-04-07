@@ -18,14 +18,14 @@ public class LinkUtil {
 			higherLevelConcept.getRoList().add(higherLevelRo);
 		}
 
-		// check wheter a group exists for the higherLevelRo
+		// check whether a group exists for the higherLevelRo
 		if (!group.getMap().containsKey(higherLevelRo)) {
 			// if not, create it
-			Link link = new Link(higherLevelRo);
+			Link link = new Link(ro);
 			group.getMap().put(higherLevelRo, link);
 		}
 		// add the relation ro-higherLevelRoCode
-		group.getMap().get(higherLevelRo).getRoSet().add(ro);
+		group.getMap().get(higherLevelRo).getMemberSet().add(ro);
 
 	}
 

@@ -55,7 +55,6 @@ public class ConceptTest {
 		familyConcept.setRoList(new ArrayList<Ro>());
 
 		Group familySpecies = new Group();
-		// Group orderFamily = new Group();
 		familySpecies.setSource(familyConcept);
 		familySpecies.setTarget(speciesConcept);
 		familySpecies.setMap(new HashMap<Ro, Link>());
@@ -80,7 +79,7 @@ public class ConceptTest {
 					Ro species = new Ro(alpha3, mls);
 					speciesConcept.getRoList().add(species);
 
-					lu.buildGroup(familyConcept, familySpecies, nextLine[2], species);
+					lu.buildGroup(familyConcept, familySpecies, nextLine[8], species);
 				}
 			}
 
@@ -89,10 +88,9 @@ public class ConceptTest {
 			throw new RefPlusException(e);
 		}
 
-		// 12560
-
 		assertEquals(12560, speciesConcept.getRoList().size());
 		assertEquals(980, familyConcept.getRoList().size());
+		assertEquals(37, familySpecies.getMap().get(new Ro("Petromyzontidae")).getMemberSet().size());
 
 	}
 }
