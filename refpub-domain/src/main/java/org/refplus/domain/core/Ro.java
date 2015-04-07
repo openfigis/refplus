@@ -29,4 +29,10 @@ public class Ro {
 		multiLingualStringList.add(mls);
 	}
 
+	public Ro(String code) {
+		Code codeObject = new Code(code);
+		codeList = new ArrayList<Code>();
+		codeList.add(codeObject);
+	}
+
 }

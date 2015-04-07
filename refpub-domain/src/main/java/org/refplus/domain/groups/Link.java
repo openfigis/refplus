@@ -1,8 +1,12 @@
 package org.refplus.domain.groups;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import org.refplus.domain.core.Ro;
 
@@ -15,11 +19,16 @@ import org.refplus.domain.core.Ro;
  *
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Link {
 
-	private Ro source;
-	private Ro target;
+	public Link(Ro destination) {
+		roSet = new HashSet<Ro>();
+		roSet.add(destination);
+	}
+
+	private Set<Ro> roSet;
 
 }

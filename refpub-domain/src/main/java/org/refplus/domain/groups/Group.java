@@ -1,12 +1,13 @@
 package org.refplus.domain.groups;
 
-import java.util.List;
+import java.util.Map;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import org.refplus.domain.core.Concept;
 import org.refplus.domain.core.Ro;
+import org.refplus.domain.core.SingleCoded;
 
 /**
  * A group is a holder links.
@@ -18,22 +19,11 @@ import org.refplus.domain.core.Ro;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Group extends Ro {
+public class Group extends SingleCoded {
 
 	private Concept source;
 	private Concept target;
 
-	/**
-	 * Indicator whether the relation is singular or plural.
-	 * 
-	 * TODO, do we need link type, like parent, child, etc?
-	 */
-	private Cardinality cardinality;
-
-	/**
-	 * The list is links.
-	 * 
-	 */
-	private List<Link> linkList;
+	private Map<Ro, Link> map;
 
 }

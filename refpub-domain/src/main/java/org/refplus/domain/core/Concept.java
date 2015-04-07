@@ -15,11 +15,8 @@ import org.refplus.domain.groups.Group;
  *
  */
 @Data
-@EqualsAndHashCode
-public class Concept {
-
-	protected Code conceptCode;
-	protected List<MultiLingualString> nameMls;
+@EqualsAndHashCode(callSuper = true)
+public class Concept extends SingleCoded {
 
 	/**
 	 * The instances of a concept, or in RefPlus terms, the reference objects of a concept.
