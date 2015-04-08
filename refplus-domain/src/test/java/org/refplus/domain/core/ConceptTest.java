@@ -47,14 +47,10 @@ public class ConceptTest {
 
 	@Test
 	public void testConceptSpecies() {
-		Concept speciesConcept = new Concept();
-		Concept familyConcept = new Concept();
-		Concept orderConcept = new Concept();
-		Concept iscaapGroupConcept = new Concept();
-		speciesConcept.setRoList(new Vector<Ro>());
-		familyConcept.setRoList(new Vector<Ro>());
-		orderConcept.setRoList(new Vector<Ro>());
-		iscaapGroupConcept.setRoList(new Vector<Ro>());
+		Concept speciesConcept = new Concept(new Vector<Ro>());
+		Concept familyConcept = new Concept(new Vector<Ro>());
+		Concept orderConcept = new Concept(new Vector<Ro>());
+		Concept iscaapGroupConcept = new Concept(new Vector<Ro>());
 
 		Group familySpecies = new Group(familyConcept, speciesConcept);
 		Group orderFamily = new Group(orderConcept, familyConcept);

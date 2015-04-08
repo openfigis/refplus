@@ -2,6 +2,7 @@ package org.refplus.domain.core;
 
 import java.util.Vector;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,6 +14,7 @@ import lombok.EqualsAndHashCode;
  *
  */
 @Data
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Concept extends SingleCoded {
 
