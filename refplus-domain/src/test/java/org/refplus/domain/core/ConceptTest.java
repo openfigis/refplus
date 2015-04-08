@@ -18,8 +18,66 @@ import au.com.bytecode.opencsv.CSVReader;
 
 public class ConceptTest {
 	public static String csvFileName = "src/test/resources/CL_SPECIES_1_3.csv";
+	public static String csvFileNameArea = "src/test/resources/CL_PRODUCTION_AREA_0.csv";
 
 	MultiLingualStringUtil u = new MultiLingualStringUtil();
+
+	/**
+	 * 0 OBJECTID,N,9,0
+	 *
+	 * 1 OCEAN,C,16
+	 *
+	 * 2 SUBOCEAN,C,16
+	 *
+	 * 3 F_AREA,C,16
+	 *
+	 * 4 F_SUBAREA,C,16
+	 *
+	 * 5 F_SUBUNIT,C,16
+	 *
+	 * 6 F_DIVISION,C,16
+	 *
+	 * 7 F_SUBDIVIS,C,16
+	 *
+	 * 8 Shape_Leng,N,19,11
+	 *
+	 * 9 Shape_Area,N,19,11
+	 *
+	 */
+
+	@Test
+	public void testConceptAreas() {
+		Concept subunitConcept = new Concept(new Vector<Ro>());
+
+		// Group familySpecies = new Group(familyConcept, speciesConcept);
+
+		try {
+			CSVReader reader = new CSVReader(new FileReader(csvFileNameArea));
+
+			reader.readNext();
+			String[] nextLine;
+			LinkUtil lu = new LinkUtil();
+
+			while ((nextLine = reader.readNext()) != null) {
+
+				if (!StringUtils.isBlank(nextLine[3])) {
+
+					// MultiLingualString mls = u.english(nextLine[1]);
+
+					lu.addCodeAsRo(subunitConcept, nextLine[5]);
+
+				}
+			}
+
+			reader.close();
+		} catch (IOException e) {
+			throw new RefPlusException(e);
+		}
+
+		assertEquals(2, subunitConcept.getRoList().size());
+		// assertEquals(37, familySpecies.getMap().get(new Ro("Petromyzontidae")).getMemberSet().size());
+
+	}
 
 	/**
 	 * 0 ISSCAAP
@@ -45,7 +103,7 @@ public class ConceptTest {
 	 * 10 Stats_data
 	 */
 
-	@Test
+	// @Test
 	public void testConceptSpecies() {
 		Concept speciesConcept = new Concept(new Vector<Ro>());
 		Concept familyConcept = new Concept(new Vector<Ro>());

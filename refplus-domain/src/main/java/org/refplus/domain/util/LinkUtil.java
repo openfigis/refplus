@@ -1,5 +1,6 @@
 package org.refplus.domain.util;
 
+import org.apache.commons.lang.StringUtils;
 import org.refplus.domain.core.Concept;
 import org.refplus.domain.core.Ro;
 import org.refplus.domain.groups.Group;
@@ -23,6 +24,14 @@ public class LinkUtil {
 		}
 		// add the relation ro-higherLevelRoCode
 		group.getMap().get(higherLevelRo).getMemberSet().add(ro);
+
+	}
+
+	public void addCodeAsRo(Concept subunitConcept, String codeString) {
+		Ro ro = new Ro(codeString);
+		if (!subunitConcept.getRoList().contains(ro) && !StringUtils.isBlank(codeString)) {
+			subunitConcept.getRoList().add(ro);
+		}
 
 	}
 
