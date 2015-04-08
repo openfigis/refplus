@@ -11,7 +11,7 @@ import org.refplus.domain.core.Ro;
 import org.refplus.domain.core.SingleCoded;
 
 /**
- * A group is a holder links.
+ * A group is a holder of links.
  * 
  * 
  * 

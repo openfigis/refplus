@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Vector;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
@@ -51,10 +51,10 @@ public class ConceptTest {
 		Concept familyConcept = new Concept();
 		Concept orderConcept = new Concept();
 		Concept iscaapGroupConcept = new Concept();
-		speciesConcept.setRoList(new ArrayList<Ro>());
-		familyConcept.setRoList(new ArrayList<Ro>());
-		orderConcept.setRoList(new ArrayList<Ro>());
-		iscaapGroupConcept.setRoList(new ArrayList<Ro>());
+		speciesConcept.setRoList(new Vector<Ro>());
+		familyConcept.setRoList(new Vector<Ro>());
+		orderConcept.setRoList(new Vector<Ro>());
+		iscaapGroupConcept.setRoList(new Vector<Ro>());
 
 		Group familySpecies = new Group(familyConcept, speciesConcept);
 		Group orderFamily = new Group(orderConcept, familyConcept);

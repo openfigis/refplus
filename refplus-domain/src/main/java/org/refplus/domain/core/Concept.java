@@ -1,6 +1,6 @@
 package org.refplus.domain.core;
 
-import java.util.List;
+import java.util.Vector;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,6 +20,6 @@ public class Concept extends SingleCoded {
 	 * The instances of a concept, or in RefPlus terms, the reference objects of a concept. If the concept is Country,
 	 * the Ro instances are Germany, France, Mexico, etc.
 	 */
-	private List<Ro> roList;
+	private Vector<Ro> roList;
 
 }
