@@ -48,7 +48,7 @@ public class ConceptTest {
 	 */
 
 	@Test
-	public void testConcept() {
+	public void testConceptSpecies() {
 		Concept speciesConcept = new Concept();
 		Concept familyConcept = new Concept();
 		speciesConcept.setRoList(new ArrayList<Ro>());

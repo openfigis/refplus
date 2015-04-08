@@ -12,7 +12,9 @@ import org.refplus.domain.core.Ro;
 
 /**
  * 
- * A link links 2 Ros.
+ * A link contains the Ros being part of the same hierarchical element. Examples of links are: Countries of the
+ * continent Europe. Species of a particular family.
+ * 
  * 
  * 
  * @author Erik van Ingen
@@ -24,11 +26,17 @@ import org.refplus.domain.core.Ro;
 @EqualsAndHashCode
 public class Link {
 
+	/**
+	 * Constructor to create a link with already a first element.
+	 */
 	public Link(Ro destination) {
 		memberSet = new HashSet<Ro>();
 		memberSet.add(destination);
 	}
 
+	/**
+	 * All the Members of this link
+	 */
 	private Set<Ro> memberSet;
 
 }

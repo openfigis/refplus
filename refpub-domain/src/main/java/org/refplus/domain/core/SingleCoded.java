@@ -9,6 +9,13 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public abstract class SingleCoded {
 
+	/**
+	 * The code for this object. It is not foreseen to have multiple codes.
+	 */
 	protected Code conceptCode;
+
+	/**
+	 * The names in different languages for this object.
+	 */
 	protected List<MultiLingualString> name;
 }

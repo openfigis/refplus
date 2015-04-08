@@ -5,10 +5,8 @@ import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import org.refplus.domain.groups.Group;
-
 /**
- * A Concept.
+ * A Concept. Can be a country, species, city, whatever
  * 
  * 
  * @author Erik van Ingen
@@ -19,17 +17,9 @@ import org.refplus.domain.groups.Group;
 public class Concept extends SingleCoded {
 
 	/**
-	 * The instances of a concept, or in RefPlus terms, the reference objects of a concept.
+	 * The instances of a concept, or in RefPlus terms, the reference objects of a concept. If the concept is Country,
+	 * the Ro instances are Germany, France, Mexico, etc.
 	 */
 	private List<Ro> roList;
-
-	/**
-	 * In order to understand the hierarchical context of a Concept, all the groups where it belongs to.
-	 * 
-	 * This one breaks the rule of the unidirectional dependency between the package core and groups. TODO can this be
-	 * improved?
-	 * 
-	 */
-	private List<Group> groupList;
 
 }
