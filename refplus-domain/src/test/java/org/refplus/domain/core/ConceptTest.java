@@ -65,9 +65,7 @@ public class ConceptTest {
 
 			reader.readNext();
 			String[] nextLine;
-			LinkUtil luFamilySpecies = new LinkUtil();
-			LinkUtil luOrderFamily = new LinkUtil();
-			LinkUtil luIscaapGroupSpecies = new LinkUtil();
+			LinkUtil lu = new LinkUtil();
 
 			while ((nextLine = reader.readNext()) != null) {
 
@@ -86,9 +84,9 @@ public class ConceptTest {
 					Ro order = new Ro(nextLine[9]);
 					Ro iscaapGroup = new Ro(nextLine[0]);
 
-					luFamilySpecies.buildGroup(familyConcept, familySpecies, family, species);
-					luOrderFamily.buildGroup(orderConcept, orderFamily, order, family);
-					luIscaapGroupSpecies.buildGroup(iscaapGroupConcept, iscaapGroupSpecies, iscaapGroup, species);
+					lu.buildGroup(familyConcept, familySpecies, family, species);
+					lu.buildGroup(orderConcept, orderFamily, order, family);
+					lu.buildGroup(iscaapGroupConcept, iscaapGroupSpecies, iscaapGroup, species);
 
 				}
 			}
