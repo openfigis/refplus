@@ -8,8 +8,6 @@
 		<version>0.1</version>
 	</parent>
 	<artifactId>refplus-domain</artifactId>
-	<name>refplus-dao</name>
-	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
