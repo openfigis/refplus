@@ -23,6 +23,9 @@ public class ConceptTest {
 	MultiLingualStringUtil u = new MultiLingualStringUtil();
 
 	/**
+	 * 
+	 * http://figisapps.fao.org/FIGISwiki/index.php/FMA_SDMX_Codelist
+	 * 
 	 * 0 OBJECTID,N,9,0
 	 *
 	 * 1 OCEAN,C,16
@@ -48,8 +51,11 @@ public class ConceptTest {
 	@Test
 	public void testConceptAreas() {
 		Concept subunitConcept = new Concept(new Vector<Ro>());
+		Concept subDivisionConcept = new Concept(new Vector<Ro>());
+		Concept subAreaConcept = new Concept(new Vector<Ro>());
 
-		// Group familySpecies = new Group(familyConcept, speciesConcept);
+		Group subDivisionSubUnit = new Group(subDivisionConcept, subunitConcept);
+		Group subAreaSubDivision = new Group(subDivisionConcept, subAreaConcept);
 
 		try {
 			CSVReader reader = new CSVReader(new FileReader(csvFileNameArea));
@@ -64,7 +70,17 @@ public class ConceptTest {
 
 					// MultiLingualString mls = u.english(nextLine[1]);
 
-					lu.addCodeAsRo(subunitConcept, nextLine[5]);
+					Ro subunit = lu.addCodeAsRo(subunitConcept, nextLine[5]);
+					Ro subDivision = lu.addCodeAsRo(subDivisionConcept, nextLine[7]);
+
+					if (subDivision != null && subunit != null) {
+						lu.buildGroup(subDivisionConcept, subDivisionSubUnit, subDivision, subunit);
+					}
+
+					Ro subArea = lu.addCodeAsRo(subAreaConcept, nextLine[4]);
+					if (subArea != null && subDivision != null) {
+						lu.buildGroup(subAreaConcept, subAreaSubDivision, subArea, subDivision);
+					}
 
 				}
 			}
@@ -75,7 +91,11 @@ public class ConceptTest {
 		}
 
 		assertEquals(2, subunitConcept.getRoList().size());
-		// assertEquals(37, familySpecies.getMap().get(new Ro("Petromyzontidae")).getMemberSet().size());
+		assertEquals(61, subDivisionConcept.getRoList().size());
+		assertEquals(92, subAreaConcept.getRoList().size());
+
+		assertEquals(2, subDivisionSubUnit.getMap().get(new Ro("21.5.Z.e")).getMemberSet().size());
+		assertEquals(11, subAreaSubDivision.getMap().get(new Ro("27.3")).getMemberSet().size());
 
 	}
 

@@ -27,11 +27,21 @@ public class LinkUtil {
 
 	}
 
-	public void addCodeAsRo(Concept subunitConcept, String codeString) {
-		Ro ro = new Ro(codeString);
-		if (!subunitConcept.getRoList().contains(ro) && !StringUtils.isBlank(codeString)) {
-			subunitConcept.getRoList().add(ro);
+	public Ro addCodeAsRo(Concept subunitConcept, String codeString) {
+
+		if (codeString.equals("21.5.Z")) {
+			System.out.println();
 		}
+
+		Ro ro = new Ro(codeString);
+		if (StringUtils.isBlank(codeString)) {
+			ro = null;
+		} else {
+			if (!subunitConcept.getRoList().contains(ro)) {
+				subunitConcept.getRoList().add(ro);
+			}
+		}
+		return ro;
 
 	}
 
