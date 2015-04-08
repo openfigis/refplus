@@ -132,7 +132,7 @@ public class ConceptTest {
 	 * 10 Stats_data
 	 */
 
-	// @Test
+	@Test
 	public void testConceptSpecies() {
 		Concept speciesConcept = new Concept(new Vector<Ro>());
 		Concept familyConcept = new Concept(new Vector<Ro>());
