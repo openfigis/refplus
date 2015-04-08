@@ -53,9 +53,11 @@ public class ConceptTest {
 		Concept subunitConcept = new Concept(new Vector<Ro>());
 		Concept subDivisionConcept = new Concept(new Vector<Ro>());
 		Concept subAreaConcept = new Concept(new Vector<Ro>());
+		Concept majorAreaConcept = new Concept(new Vector<Ro>());
 
 		Group subDivisionSubUnit = new Group(subDivisionConcept, subunitConcept);
 		Group subAreaSubDivision = new Group(subDivisionConcept, subAreaConcept);
+		Group majorAreaSubArea = new Group(subAreaConcept, majorAreaConcept);
 
 		try {
 			CSVReader reader = new CSVReader(new FileReader(csvFileNameArea));
@@ -82,6 +84,11 @@ public class ConceptTest {
 						lu.buildGroup(subAreaConcept, subAreaSubDivision, subArea, subDivision);
 					}
 
+					Ro majorArea = lu.addCodeAsRo(majorAreaConcept, nextLine[3]);
+					if (majorArea != null && subArea != null) {
+						lu.buildGroup(majorAreaConcept, majorAreaSubArea, majorArea, subArea);
+					}
+
 				}
 			}
 
@@ -93,9 +100,11 @@ public class ConceptTest {
 		assertEquals(2, subunitConcept.getRoList().size());
 		assertEquals(61, subDivisionConcept.getRoList().size());
 		assertEquals(92, subAreaConcept.getRoList().size());
+		assertEquals(19, majorAreaConcept.getRoList().size());
 
 		assertEquals(2, subDivisionSubUnit.getMap().get(new Ro("21.5.Z.e")).getMemberSet().size());
 		assertEquals(11, subAreaSubDivision.getMap().get(new Ro("27.3")).getMemberSet().size());
+		assertEquals(7, majorAreaSubArea.getMap().get(new Ro("21")).getMemberSet().size());
 
 	}
 
