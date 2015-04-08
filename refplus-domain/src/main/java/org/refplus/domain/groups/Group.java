@@ -1,5 +1,6 @@
 package org.refplus.domain.groups;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import lombok.Data;
@@ -25,5 +26,12 @@ public class Group extends SingleCoded {
 	private Concept target;
 
 	private Map<Ro, Link> map;
+
+	public Group(Concept source, Concept target) {
+		super();
+		this.source = source;
+		this.target = target;
+		this.map = new HashMap<Ro, Link>();
+	}
 
 }

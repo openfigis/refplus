@@ -7,10 +7,7 @@ import org.refplus.domain.groups.Link;
 
 public class LinkUtil {
 
-	public void buildGroup(Concept higherLevelConcept, Group group, String higherLevelRoCode, Ro ro) {
-
-		// first create a Ro for the higher level ro instance
-		Ro higherLevelRo = new Ro(higherLevelRoCode);
+	public void buildGroup(Concept higherLevelConcept, Group group, Ro higherLevelRo, Ro ro) {
 
 		// check whether this one is already in the list
 		if (!higherLevelConcept.getRoList().contains(higherLevelRo)) {

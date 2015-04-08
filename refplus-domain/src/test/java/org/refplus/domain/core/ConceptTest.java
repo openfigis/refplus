@@ -5,13 +5,11 @@ import static org.junit.Assert.assertEquals;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.refplus.RefPlusException;
 import org.refplus.domain.groups.Group;
-import org.refplus.domain.groups.Link;
 import org.refplus.domain.util.Lang;
 import org.refplus.domain.util.LinkUtil;
 import org.refplus.domain.util.MultiLingualStringUtil;
@@ -51,20 +49,25 @@ public class ConceptTest {
 	public void testConceptSpecies() {
 		Concept speciesConcept = new Concept();
 		Concept familyConcept = new Concept();
+		Concept orderConcept = new Concept();
+		Concept iscaapGroupConcept = new Concept();
 		speciesConcept.setRoList(new ArrayList<Ro>());
 		familyConcept.setRoList(new ArrayList<Ro>());
+		orderConcept.setRoList(new ArrayList<Ro>());
+		iscaapGroupConcept.setRoList(new ArrayList<Ro>());
 
-		Group familySpecies = new Group();
-		familySpecies.setSource(familyConcept);
-		familySpecies.setTarget(speciesConcept);
-		familySpecies.setMap(new HashMap<Ro, Link>());
+		Group familySpecies = new Group(familyConcept, speciesConcept);
+		Group orderFamily = new Group(orderConcept, familyConcept);
+		Group iscaapGroupSpecies = new Group(orderConcept, familyConcept);
 
 		try {
 			CSVReader reader = new CSVReader(new FileReader(csvFileName), '\t');
 
 			reader.readNext();
 			String[] nextLine;
-			LinkUtil lu = new LinkUtil();
+			LinkUtil luFamilySpecies = new LinkUtil();
+			LinkUtil luOrderFamily = new LinkUtil();
+			LinkUtil luIscaapGroupSpecies = new LinkUtil();
 
 			while ((nextLine = reader.readNext()) != null) {
 
@@ -79,7 +82,14 @@ public class ConceptTest {
 					Ro species = new Ro(alpha3, mls);
 					speciesConcept.getRoList().add(species);
 
-					lu.buildGroup(familyConcept, familySpecies, nextLine[8], species);
+					Ro family = new Ro(nextLine[8]);
+					Ro order = new Ro(nextLine[9]);
+					Ro iscaapGroup = new Ro(nextLine[0]);
+
+					luFamilySpecies.buildGroup(familyConcept, familySpecies, family, species);
+					luOrderFamily.buildGroup(orderConcept, orderFamily, order, family);
+					luIscaapGroupSpecies.buildGroup(iscaapGroupConcept, iscaapGroupSpecies, iscaapGroup, species);
+
 				}
 			}
 
@@ -90,7 +100,11 @@ public class ConceptTest {
 
 		assertEquals(12560, speciesConcept.getRoList().size());
 		assertEquals(980, familyConcept.getRoList().size());
+		assertEquals(140, orderConcept.getRoList().size());
+		assertEquals(51, iscaapGroupConcept.getRoList().size());
 		assertEquals(37, familySpecies.getMap().get(new Ro("Petromyzontidae")).getMemberSet().size());
+		assertEquals(6, orderFamily.getMap().get(new Ro("SQUALIFORMES")).getMemberSet().size());
+		assertEquals(886, iscaapGroupSpecies.getMap().get(new Ro("38")).getMemberSet().size());
 
 	}
 }
