@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class Ro {
 
-	protected List<Code> codeList;
-	protected List<MultiLingualString> multiLingualStringList;
+	private List<Code> codeList;
+	private List<MultiLingualString> multiLingualStringList;
 
 	public Ro(Code code, MultiLingualString mls) {
 		codeList = new ArrayList<Code>();
