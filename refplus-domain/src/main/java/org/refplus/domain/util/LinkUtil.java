@@ -1,6 +1,7 @@
 package org.refplus.domain.util;
 
 import org.apache.commons.lang.StringUtils;
+import org.refplus.domain.core.AttributeConcept;
 import org.refplus.domain.core.Concept;
 import org.refplus.domain.core.Ro;
 import org.refplus.domain.groups.Group;
@@ -27,13 +28,13 @@ public class LinkUtil {
 
 	}
 
-	public Ro addCodeAsRo(Concept subunitConcept, String codeString) {
+	public Ro addCodeAsRo(Concept subunitConcept, AttributeConcept attributeConcept, String codeString) {
 
 		if (codeString.equals("21.5.Z")) {
 			System.out.println();
 		}
 
-		Ro ro = new Ro(codeString);
+		Ro ro = new Ro(attributeConcept, codeString);
 		if (StringUtils.isBlank(codeString)) {
 			ro = null;
 		} else {

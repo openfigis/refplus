@@ -51,9 +51,16 @@ public class ConceptTest {
 	@Test
 	public void testConceptAreas() {
 		Concept subunitConcept = new Concept(new Vector<Ro>());
+		AttributeConcept subUnitAttributeConcept = new AttributeConcept();
+
 		Concept subDivisionConcept = new Concept(new Vector<Ro>());
+		AttributeConcept subDivisionAttributeConcept = new AttributeConcept();
+
 		Concept subAreaConcept = new Concept(new Vector<Ro>());
+		AttributeConcept subAreaAttributeConcept = new AttributeConcept();
+
 		Concept majorAreaConcept = new Concept(new Vector<Ro>());
+		AttributeConcept majorAreaAttributeConcept = new AttributeConcept();
 
 		Group subDivisionSubUnit = new Group(subDivisionConcept, subunitConcept);
 		Group subAreaSubDivision = new Group(subDivisionConcept, subAreaConcept);
@@ -72,19 +79,19 @@ public class ConceptTest {
 
 					// MultiLingualString mls = u.english(nextLine[1]);
 
-					Ro subunit = lu.addCodeAsRo(subunitConcept, nextLine[5]);
-					Ro subDivision = lu.addCodeAsRo(subDivisionConcept, nextLine[7]);
+					Ro subunit = lu.addCodeAsRo(subunitConcept, subUnitAttributeConcept, nextLine[5]);
+					Ro subDivision = lu.addCodeAsRo(subDivisionConcept, subDivisionAttributeConcept, nextLine[7]);
 
 					if (subDivision != null && subunit != null) {
 						lu.buildGroup(subDivisionConcept, subDivisionSubUnit, subDivision, subunit);
 					}
 
-					Ro subArea = lu.addCodeAsRo(subAreaConcept, nextLine[4]);
+					Ro subArea = lu.addCodeAsRo(subAreaConcept, subAreaAttributeConcept, nextLine[4]);
 					if (subArea != null && subDivision != null) {
 						lu.buildGroup(subAreaConcept, subAreaSubDivision, subArea, subDivision);
 					}
 
-					Ro majorArea = lu.addCodeAsRo(majorAreaConcept, nextLine[3]);
+					Ro majorArea = lu.addCodeAsRo(majorAreaConcept, majorAreaAttributeConcept, nextLine[3]);
 					if (majorArea != null && subArea != null) {
 						lu.buildGroup(majorAreaConcept, majorAreaSubArea, majorArea, subArea);
 					}
@@ -102,9 +109,10 @@ public class ConceptTest {
 		assertEquals(92, subAreaConcept.getRoList().size());
 		assertEquals(19, majorAreaConcept.getRoList().size());
 
-		assertEquals(2, subDivisionSubUnit.getMap().get(new Ro("21.5.Z.e")).getMemberSet().size());
-		assertEquals(11, subAreaSubDivision.getMap().get(new Ro("27.3")).getMemberSet().size());
-		assertEquals(7, majorAreaSubArea.getMap().get(new Ro("21")).getMemberSet().size());
+		assertEquals(2, subDivisionSubUnit.getMap().get(new Ro(subDivisionAttributeConcept, "21.5.Z.e")).getMemberSet()
+				.size());
+		assertEquals(11, subAreaSubDivision.getMap().get(new Ro(subAreaAttributeConcept, "27.3")).getMemberSet().size());
+		assertEquals(7, majorAreaSubArea.getMap().get(new Ro(majorAreaAttributeConcept, "21")).getMemberSet().size());
 
 	}
 
@@ -135,9 +143,17 @@ public class ConceptTest {
 	@Test
 	public void testConceptSpecies() {
 		Concept speciesConcept = new Concept(new Vector<Ro>());
+		AttributeConcept alpha3CodeConcept = new AttributeConcept();
+		AttributeConcept asfisDescriptionConcept = new AttributeConcept();
+
 		Concept familyConcept = new Concept(new Vector<Ro>());
+		AttributeConcept familyCodeAttributeConcept = new AttributeConcept();
+
 		Concept orderConcept = new Concept(new Vector<Ro>());
+		AttributeConcept orderCodeAttributeConcept = new AttributeConcept();
+
 		Concept iscaapGroupConcept = new Concept(new Vector<Ro>());
+		AttributeConcept iscaapGroupCodeAttributeConcept = new AttributeConcept();
 
 		Group familySpecies = new Group(familyConcept, speciesConcept);
 		Group orderFamily = new Group(orderConcept, familyConcept);
@@ -160,12 +176,12 @@ public class ConceptTest {
 					u.addLanguage(Lang.FR, mls, nextLine[5]);
 					u.addLanguage(Lang.ES, mls, nextLine[6]);
 					u.addLanguage(Lang.LA, mls, nextLine[3]);
-					Ro species = new Ro(alpha3, mls);
+					Ro species = new Ro(alpha3CodeConcept, alpha3, asfisDescriptionConcept, mls);
 					speciesConcept.getRoList().add(species);
 
-					Ro family = new Ro(nextLine[8]);
-					Ro order = new Ro(nextLine[9]);
-					Ro iscaapGroup = new Ro(nextLine[0]);
+					Ro family = new Ro(familyCodeAttributeConcept, nextLine[8]);
+					Ro order = new Ro(orderCodeAttributeConcept, nextLine[9]);
+					Ro iscaapGroup = new Ro(iscaapGroupCodeAttributeConcept, nextLine[0]);
 
 					lu.buildGroup(familyConcept, familySpecies, family, species);
 					lu.buildGroup(orderConcept, orderFamily, order, family);
@@ -183,9 +199,12 @@ public class ConceptTest {
 		assertEquals(980, familyConcept.getRoList().size());
 		assertEquals(140, orderConcept.getRoList().size());
 		assertEquals(51, iscaapGroupConcept.getRoList().size());
-		assertEquals(37, familySpecies.getMap().get(new Ro("Petromyzontidae")).getMemberSet().size());
-		assertEquals(6, orderFamily.getMap().get(new Ro("SQUALIFORMES")).getMemberSet().size());
-		assertEquals(886, iscaapGroupSpecies.getMap().get(new Ro("38")).getMemberSet().size());
+		assertEquals(37, familySpecies.getMap().get(new Ro(familyCodeAttributeConcept, "Petromyzontidae"))
+				.getMemberSet().size());
+		assertEquals(6, orderFamily.getMap().get(new Ro(orderCodeAttributeConcept, "SQUALIFORMES")).getMemberSet()
+				.size());
+		assertEquals(886, iscaapGroupSpecies.getMap().get(new Ro(iscaapGroupCodeAttributeConcept, "38")).getMemberSet()
+				.size());
 
 	}
 }
