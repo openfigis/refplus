@@ -59,11 +59,14 @@ public class ConceptTest {
 		Concept subAreaConcept = new Concept(new Vector<Ro>());
 		AttributeConcept subAreaAttributeConcept = new AttributeConcept();
 
+		// Concept division = new D;
+
 		Concept majorAreaConcept = new Concept(new Vector<Ro>());
 		AttributeConcept majorAreaAttributeConcept = new AttributeConcept();
 
 		Group subDivisionSubUnit = new Group(subDivisionConcept, subunitConcept);
 		Group subAreaSubDivision = new Group(subDivisionConcept, subAreaConcept);
+		Group divisionSubDivision = new Group(subDivisionConcept, subAreaConcept);
 		Group majorAreaSubArea = new Group(subAreaConcept, majorAreaConcept);
 
 		try {
