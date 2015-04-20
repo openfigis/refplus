@@ -9,6 +9,17 @@ import org.refplus.domain.groups.Link;
 
 public class LinkUtil {
 
+	/**
+	 * Build up the Group. Do create the group if necessary.
+	 * 
+	 * A higherLevelRo has a one-to-may relation to the ro.
+	 * 
+	 * 
+	 * @param higherLevelConcept
+	 * @param group
+	 * @param higherLevelRo
+	 * @param ro
+	 */
 	public void buildGroup(Concept higherLevelConcept, Group group, Ro higherLevelRo, Ro ro) {
 
 		// check whether this one is already in the list
@@ -28,11 +39,19 @@ public class LinkUtil {
 
 	}
 
+	/**
+	 * Build up a ro from the codeString. Create a new ro, add the codeString as an attributeConcept attribute to the
+	 * new created ro.
+	 * 
+	 * All this, providing a non blank codeString.
+	 * 
+	 * 
+	 * @param subunitConcept
+	 * @param attributeConcept
+	 * @param codeString
+	 * @return
+	 */
 	public Ro addCodeAsRo(Concept subunitConcept, AttributeConcept attributeConcept, String codeString) {
-
-		if (codeString.equals("21.5.Z")) {
-			System.out.println();
-		}
 
 		Ro ro = new Ro(attributeConcept, codeString);
 		if (StringUtils.isBlank(codeString)) {
