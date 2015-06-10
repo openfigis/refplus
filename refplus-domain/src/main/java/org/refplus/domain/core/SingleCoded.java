@@ -1,6 +1,7 @@
 package org.refplus.domain.core;
 
 import java.util.List;
+import java.util.Optional;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,5 +18,5 @@ public abstract class SingleCoded {
 	/**
 	 * The names in different languages for this object.
 	 */
-	protected List<MultiLingualString> name;
+	protected Optional<List<MultiLingualString>> name;
 }
