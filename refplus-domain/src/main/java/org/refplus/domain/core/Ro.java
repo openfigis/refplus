@@ -30,18 +30,18 @@ public class Ro {
 	 * 
 	 * * AttributeConcept = {name, longName, code, value}
 	 */
-	private Map<AttributeConcept, Attribute> attributeMap;
+	private Map<AttributeDefinition, Attribute> attributeMap;
 
-	public Ro(AttributeConcept codeAttributeConcept, Code code, AttributeConcept mlsAttributeConcept,
+	public Ro(AttributeDefinition codeAttributeConcept, Code code, AttributeDefinition mlsAttributeConcept,
 			MultiLingualString mls) {
-		attributeMap = new HashMap<AttributeConcept, Attribute>();
+		attributeMap = new HashMap<AttributeDefinition, Attribute>();
 		attributeMap.put(codeAttributeConcept, code);
 		attributeMap.put(mlsAttributeConcept, mls);
 	}
 
-	public Ro(AttributeConcept codeAttributeConcept, String code) {
+	public Ro(AttributeDefinition codeAttributeConcept, String code) {
 		Code codeObject = new Code(code);
-		attributeMap = new HashMap<AttributeConcept, Attribute>();
+		attributeMap = new HashMap<AttributeDefinition, Attribute>();
 		attributeMap.put(codeAttributeConcept, codeObject);
 	}
 

@@ -1,7 +1,7 @@
 package org.refplus.domain.util;
 
 import org.apache.commons.lang.StringUtils;
-import org.refplus.domain.core.AttributeConcept;
+import org.refplus.domain.core.AttributeDefinition;
 import org.refplus.domain.core.Concept;
 import org.refplus.domain.core.Ro;
 import org.refplus.domain.groups.Group;
@@ -51,7 +51,7 @@ public class LinkUtil {
 	 * @param codeString
 	 * @return
 	 */
-	public Ro addCodeAsRo(Concept subunitConcept, AttributeConcept attributeConcept, String codeString) {
+	public Ro addCodeAsRo(Concept subunitConcept, AttributeDefinition attributeConcept, String codeString) {
 
 		Ro ro = new Ro(attributeConcept, codeString);
 		if (StringUtils.isBlank(codeString)) {

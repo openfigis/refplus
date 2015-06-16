@@ -24,4 +24,6 @@ public class Concept extends SingleCoded {
 	 */
 	private Vector<Ro> roList;
 
+	private Vector<AttributeDefinition> attibuteDefinitionList;
+
 }

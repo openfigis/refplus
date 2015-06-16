@@ -50,19 +50,26 @@ public class ConceptTest {
 
 	@Test
 	public void testConceptAreas() {
-		Concept subunitConcept = new Concept(new Vector<Ro>());
-		AttributeConcept subUnitAttributeConcept = new AttributeConcept();
 
-		Concept subDivisionConcept = new Concept(new Vector<Ro>());
-		AttributeConcept subDivisionAttributeConcept = new AttributeConcept();
+		AttributeDefinition subUnitAttributeConcept = new AttributeDefinition();
+		Vector<AttributeDefinition> attibuteDefinitionList = new Vector<AttributeDefinition>();
+		attibuteDefinitionList.add(subUnitAttributeConcept);
+		Concept subunitConcept = new Concept(new Vector<Ro>(), attibuteDefinitionList);
 
-		Concept subAreaConcept = new Concept(new Vector<Ro>());
-		AttributeConcept subAreaAttributeConcept = new AttributeConcept();
+		AttributeDefinition subDivisionAttributeConcept = new AttributeDefinition();
+		Vector<AttributeDefinition> subDivisionAttributeDefinitionList = new Vector<AttributeDefinition>();
+		subDivisionAttributeDefinitionList.add(subDivisionAttributeConcept);
+		Concept subDivisionConcept = new Concept(new Vector<Ro>(), subDivisionAttributeDefinitionList);
 
-		// Concept division = new D;
+		AttributeDefinition subAreaAttributeConcept = new AttributeDefinition();
+		Vector<AttributeDefinition> subAreaAttributeDefinitionList = new Vector<AttributeDefinition>();
+		subDivisionAttributeDefinitionList.add(subAreaAttributeConcept);
+		Concept subAreaConcept = new Concept(new Vector<Ro>(), subAreaAttributeDefinitionList);
 
-		Concept majorAreaConcept = new Concept(new Vector<Ro>());
-		AttributeConcept majorAreaAttributeConcept = new AttributeConcept();
+		AttributeDefinition majorAreaAttributeConcept = new AttributeDefinition();
+		Vector<AttributeDefinition> majorAreaAttributeDefinitionList = new Vector<AttributeDefinition>();
+		majorAreaAttributeDefinitionList.add(majorAreaAttributeConcept);
+		Concept majorAreaConcept = new Concept(new Vector<Ro>(), majorAreaAttributeDefinitionList);
 
 		Group subDivisionSubUnit = new Group(subDivisionConcept, subunitConcept);
 		Group subAreaSubDivision = new Group(subDivisionConcept, subAreaConcept);
@@ -145,18 +152,27 @@ public class ConceptTest {
 
 	@Test
 	public void testConceptSpecies() {
-		Concept speciesConcept = new Concept(new Vector<Ro>());
-		AttributeConcept alpha3CodeConcept = new AttributeConcept();
-		AttributeConcept asfisDescriptionConcept = new AttributeConcept();
+		AttributeDefinition alpha3CodeConcept = new AttributeDefinition();
+		Vector<AttributeDefinition> alpha3List = new Vector<AttributeDefinition>();
+		alpha3List.add(alpha3CodeConcept);
+		Concept speciesConcept = new Concept(new Vector<Ro>(), alpha3List);
 
-		Concept familyConcept = new Concept(new Vector<Ro>());
-		AttributeConcept familyCodeAttributeConcept = new AttributeConcept();
+		AttributeDefinition asfisDescriptionConcept = new AttributeDefinition();
 
-		Concept orderConcept = new Concept(new Vector<Ro>());
-		AttributeConcept orderCodeAttributeConcept = new AttributeConcept();
+		AttributeDefinition familyCodeAttributeConcept = new AttributeDefinition();
+		Vector<AttributeDefinition> familyList = new Vector<AttributeDefinition>();
+		familyList.add(familyCodeAttributeConcept);
+		Concept familyConcept = new Concept(new Vector<Ro>(), familyList);
 
-		Concept iscaapGroupConcept = new Concept(new Vector<Ro>());
-		AttributeConcept iscaapGroupCodeAttributeConcept = new AttributeConcept();
+		AttributeDefinition orderCodeAttributeConcept = new AttributeDefinition();
+		Vector<AttributeDefinition> orderList = new Vector<AttributeDefinition>();
+		orderList.add(orderCodeAttributeConcept);
+		Concept orderConcept = new Concept(new Vector<Ro>(), orderList);
+
+		AttributeDefinition iscaapGroupCodeAttributeConcept = new AttributeDefinition();
+		Vector<AttributeDefinition> iscaapGroupList = new Vector<AttributeDefinition>();
+		iscaapGroupList.add(iscaapGroupCodeAttributeConcept);
+		Concept iscaapGroupConcept = new Concept(new Vector<Ro>(), iscaapGroupList);
 
 		Group familySpecies = new Group(familyConcept, speciesConcept);
 		Group orderFamily = new Group(orderConcept, familyConcept);
