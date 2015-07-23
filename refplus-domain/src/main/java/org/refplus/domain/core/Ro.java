@@ -2,6 +2,7 @@ package org.refplus.domain.core;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,6 +19,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Ro {
+
+	// private Hierarchy source;
+
+	private Map<Ro, Set<Ro>> groups;
 
 	/**
 	 * 

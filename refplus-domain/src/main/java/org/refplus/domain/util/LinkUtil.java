@@ -5,7 +5,7 @@ import org.refplus.domain.core.AttributeDefinition;
 import org.refplus.domain.core.Concept;
 import org.refplus.domain.core.Ro;
 import org.refplus.domain.groups.Group;
-import org.refplus.domain.groups.Link;
+import org.refplus.domain.groups.Grouping;
 
 public class LinkUtil {
 
@@ -31,7 +31,7 @@ public class LinkUtil {
 		// check whether a group exists for the higherLevelRo
 		if (!group.getMap().containsKey(higherLevelRo)) {
 			// if not, create it
-			Link link = new Link(ro);
+			Grouping link = new Grouping(ro);
 			group.getMap().put(higherLevelRo, link);
 		}
 		// add the relation ro-higherLevelRoCode

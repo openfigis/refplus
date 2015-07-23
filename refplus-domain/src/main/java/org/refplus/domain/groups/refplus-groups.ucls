@@ -10,8 +10,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="org.refplus.domain.groups.Link" project="refplus-domain" 
-    file="/refplus-domain/src/main/java/org/refplus/domain/groups/Link.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="org.refplus.domain.groups.Grouping" project="refplus-domain" 
+    file="/refplus-domain/src/main/java/org/refplus/domain/groups/Grouping.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="266" y="403"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -62,10 +62,10 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="11">    
-    <bendpoint x="408" y="153"/>    
+    <bendpoint x="418" y="322"/>    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="12" name="source">        
-        <position height="20" width="47" x="537" y="178"/>      
+      <attribute id="12" name="target">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="13" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
@@ -75,28 +75,28 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="14">    
-    <bendpoint x="418" y="322"/>    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="15" name="target">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="16" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="17">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="18" name="map">        
+      <attribute id="15" name="group">        
         <position height="20" width="33" x="184" y="380"/>      
       </attribute>      
-      <multiplicity id="19" minimum="0" maximum="2147483647">        
+      <multiplicity id="16" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="17">    
+    <bendpoint x="408" y="153"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="18" name="source">        
+        <position height="20" width="47" x="537" y="178"/>      
+      </attribute>      
+      <multiplicity id="19" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
