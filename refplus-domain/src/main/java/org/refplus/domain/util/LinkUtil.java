@@ -1,11 +1,8 @@
 package org.refplus.domain.util;
 
 import org.apache.commons.lang.StringUtils;
-import org.refplus.domain.core.AttributeDefinition;
-import org.refplus.domain.core.Concept;
 import org.refplus.domain.core.Ro;
-import org.refplus.domain.groups.Group;
-import org.refplus.domain.groups.Grouping;
+
 
 public class LinkUtil {
 
@@ -28,6 +25,7 @@ public class LinkUtil {
 			higherLevelConcept.getRoList().add(higherLevelRo);
 		}
 
+		/*
 		// check whether a group exists for the higherLevelRo
 		if (!group.getMap().containsKey(higherLevelRo)) {
 			// if not, create it
@@ -36,7 +34,7 @@ public class LinkUtil {
 		}
 		// add the relation ro-higherLevelRoCode
 		group.getMap().get(higherLevelRo).getMemberSet().add(ro);
-
+		 */
 	}
 
 	/**

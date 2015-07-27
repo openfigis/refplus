@@ -9,26 +9,11 @@ package org.refplus.domain.util;
  */
 public class Lang {
 
-	private Lang() {
-
-	}
-
-	public static final Integer EN = 1;
-	public static final Integer FR = 2;
-	public static final Integer ES = 3;
-	public static final Integer ZH = 4;
-	public static final Integer AR = 5;
-	public static final Integer IT = 6;
-	public static final Integer DE = 7;
-	public static final Integer PT = 8;
-	public static final Integer EL = 9;
-	public static final Integer HR = 10;
-	public static final Integer SL = 11;
-	public static final Integer RU = 12;
-	public static final Integer UK = 13;
-	public static final Integer BG = 14;
-	public static final Integer RO = 15;
-	public static final Integer TR = 16;
-	public static final Integer LA = 99;
+	public static final String EN = "en";
+	public static final String FR = "fr";
+	public static final String ES = "sp";
+	public static final String ZH = "zh";
+	public static final String AR = "ar";
+	public static final String RU = "ru";
 
 }

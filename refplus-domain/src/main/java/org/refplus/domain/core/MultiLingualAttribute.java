@@ -16,12 +16,15 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class MultiLingualString extends Attribute implements Serializable {
-
-	private Long id;
-
-	private Map<Integer, String> stringMap;
+public class MultiLingualAttribute implements Serializable {
 
 	private static final long serialVersionUID = -6780225288480597193L;
 
+	/**
+	 * <language, value>
+	 * example: <"en", "Italy">
+	 */
+	private Map<String, String> attrMultiLanguage;
+
+	private boolean isCode;
 }

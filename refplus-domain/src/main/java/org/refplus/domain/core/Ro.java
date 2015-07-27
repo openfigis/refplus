@@ -1,6 +1,5 @@
 package org.refplus.domain.core;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,8 +19,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class Ro {
 
-	// private Hierarchy source;
-
+	private Ro hierarchySource;
+	
 	private Map<Ro, Set<Ro>> groups;
 
 	/**
@@ -33,21 +32,10 @@ public class Ro {
 	 * names. Now they are listed as 2 attributes in the multiLingualStringList. You would then have to find it, while
 	 * pulling it from attributeMap1 is a one command action.
 	 * 
-	 * * AttributeConcept = {name, longName, code, value}
+	 *  AttributeConcept = {name, longName, code, value}
+	 *  mandatory attributes: name<MultiLingualAttribute>, ID<Attribute>
 	 */
-	private Map<AttributeDefinition, Attribute> attributeMap;
-
-	public Ro(AttributeDefinition codeAttributeConcept, Code code, AttributeDefinition mlsAttributeConcept,
-			MultiLingualString mls) {
-		attributeMap = new HashMap<AttributeDefinition, Attribute>();
-		attributeMap.put(codeAttributeConcept, code);
-		attributeMap.put(mlsAttributeConcept, mls);
-	}
-
-	public Ro(AttributeDefinition codeAttributeConcept, String code) {
-		Code codeObject = new Code(code);
-		attributeMap = new HashMap<AttributeDefinition, Attribute>();
-		attributeMap.put(codeAttributeConcept, codeObject);
-	}
+	private Map<String, Attribute> attributeMap;
+	private Map<String, MultiLingualAttribute> multilangAttributeMap;
 
 }
