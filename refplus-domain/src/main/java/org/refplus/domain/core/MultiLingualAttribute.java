@@ -26,5 +26,4 @@ public class MultiLingualAttribute implements Serializable {
 	 */
 	private Map<String, String> attrMultiLanguage;
 
-	private boolean isCode;
 }

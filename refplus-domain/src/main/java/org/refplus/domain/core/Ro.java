@@ -1,7 +1,8 @@
 package org.refplus.domain.core;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+import java.util.Vector;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,9 +20,13 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class Ro {
 
-	private Ro hierarchySource;
+	public Ro(String attributeName) {
+		setAttribute("name", attributeName);
+	}
 	
-	private Map<Ro, Set<Ro>> groups;
+	private Ro hierarchySource = null;
+	
+	private Map<String, Vector<Ro>> groups;
 
 	/**
 	 * 
@@ -35,7 +40,40 @@ public class Ro {
 	 *  AttributeConcept = {name, longName, code, value}
 	 *  mandatory attributes: name<MultiLingualAttribute>, ID<Attribute>
 	 */
-	private Map<String, Attribute> attributeMap;
-	private Map<String, MultiLingualAttribute> multilangAttributeMap;
+	private Map<String, String> attributeMap = new HashMap<String, String>();
+	private Map<String,  Map<String, String>> multilangAttributeMap = new HashMap<String,  Map<String, String>>();
 
+	public void setAttribute (String attributeName, String value) {
+
+		if (attributeName.isEmpty())
+			return;
+		
+		attributeMap.put(attributeName, value);
+	}
+	
+	/**
+	 * @param attributeName
+	 * @return the attribute or the multilangAttribute in english language
+	 */
+	public String getAttribute (String attributeName) {
+		if (attributeMap.containsKey(attributeName))
+			return (attributeMap.get(attributeName));
+		
+		if (!multilangAttributeMap.containsKey(attributeName))
+			return (null);
+		return (multilangAttributeMap.get(attributeName).get("en"));
+	}
+	
+	public Ro getGroupItemByName (String groupName, String itemName) {
+		Vector<Ro> aGroup = groups.get(groupName);
+		
+		if (aGroup == null)
+			return (null);
+
+	    for (Ro groupMember : aGroup) {
+	    	if (groupMember.getAttribute("name").equals(itemName))
+	    		return (groupMember);
+	    }
+		return (null);
+	}
 }

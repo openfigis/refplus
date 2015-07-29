@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode
-public abstract class Attribute {
+public class Attribute {
 
-	private String attributeValue;
-	private boolean isCode;
+	private String attributeValue = null;
+	private boolean isCode = false;
 	
 }
