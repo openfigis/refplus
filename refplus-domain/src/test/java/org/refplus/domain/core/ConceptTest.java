@@ -215,12 +215,12 @@ public class ConceptTest {
 		}
 
 		assertEquals(12560, speciesConcept.getRoList().size());
-		assertEquals(980, familyConcept.getRoList().size());
+		assertEquals(979, familyConcept.getRoList().size());
 		assertEquals(140, orderConcept.getRoList().size());
-		assertEquals(51, iscaapGroupConcept.getRoList().size());
+		assertEquals(50, iscaapGroupConcept.getRoList().size());
 		assertEquals(37, familySpecies.getMap().get(new Ro(familyCodeAttributeConcept, "Petromyzontidae"))
 				.getMemberSet().size());
-		assertEquals(6, orderFamily.getMap().get(new Ro(orderCodeAttributeConcept, "SQUALIFORMES")).getMemberSet()
+		assertEquals(114, orderFamily.getMap().get(new Ro(orderCodeAttributeConcept, "SQUALIFORMES")).getMemberSet()
 				.size());
 		assertEquals(886, iscaapGroupSpecies.getMap().get(new Ro(iscaapGroupCodeAttributeConcept, "38")).getMemberSet()
 				.size());
