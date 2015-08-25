@@ -4,15 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Set;
 import java.util.Vector;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.refplus.RefPlusException;
-import org.refplus.domain.util.Lang;
-import org.refplus.domain.util.LinkUtil;
-import org.refplus.domain.util.MultiLingualStringUtil;
 
 import au.com.bytecode.opencsv.CSVReader;
 
@@ -20,7 +16,7 @@ public class ConceptTest {
 	public static String csvFileName = "src/test/resources/CL_SPECIES_1_3.csv";
 	public static String csvFileNameArea = "src/test/resources/CL_PRODUCTION_AREA_0.csv";
 
-	MultiLingualStringUtil u = new MultiLingualStringUtil();
+
 
 	/**
 	 * 
@@ -38,6 +34,7 @@ public class ConceptTest {
 	 * 9 Shape_Area,N,19,11
 	 */
 	
+	@SuppressWarnings("unused")
 	private static int AREA_OBJECT_ID = 0;
 	private static int AREA_OCEAN = 1;  		// Ocean_Name
 	private static int AREA_SUBOCEAN = 2;		// ID
@@ -46,17 +43,21 @@ public class ConceptTest {
 	private static int AREA_SUBUNIT = 5;		// ID(Area).ID(SubArea).ID(Div).ID(SubDiv).ID(SubUnit)
 	private static int AREA_DIVISION = 6;		// ID(Area).ID(SubArea).ID(Div)
 	private static int AREA_SUBDIVISION = 7;	// ID(Area).ID(SubArea).ID(Div).ID(SubDiv)
+	@SuppressWarnings("unused")
 	private static int AREA_shape_len = 8;
+	@SuppressWarnings("unused")
 	private static int AREA_shape_area = 9;
+	
+	private static String WATER_AREA = "Water Area";
 
-	private Ro subUnitGroup      = new Ro("subUnitGroup");
-	private Ro subDivisionGroup  = new Ro("subDivisionGroup");
-	private Ro divisionGroup     = new Ro("divisionGroup");
-	private Ro subAreaGroup      = new Ro("subAreaGroup");
-	private Ro majorAreaGroup    = new Ro("majorAreaGroup");
-	private Ro subOceanGroup     = new Ro("subOceanGroup");
-	private Ro oceanGroup        = new Ro("oceanGroup");
-	private Ro codelistWaterArea = new Ro("codelistWaterArea");
+	private Codelist subUnitGroup      = new Codelist("subUnitGroup");
+	private Codelist subDivisionGroup  = new Codelist("subDivisionGroup");
+	private Codelist divisionGroup     = new Codelist("divisionGroup");
+	private Codelist subAreaGroup      = new Codelist("subAreaGroup");
+	private Codelist majorAreaGroup    = new Codelist("majorAreaGroup");
+	private Codelist subOceanGroup     = new Codelist("subOceanGroup");
+	private Codelist oceanGroup        = new Codelist("oceanGroup");
+	private Codelist codelistWaterArea = new Codelist("codelistWaterArea");
 	
 	@Test
 	public void testConceptAreas() {
@@ -72,37 +73,75 @@ public class ConceptTest {
 		refplus.topHierarchies.add(subOceanGroup);
 		refplus.topHierarchies.add(oceanGroup);
 		refplus.topCodelists.add(codelistWaterArea);
+		refplus.hierarchyNames.add(WATER_AREA);
 		
 		try {
 			CSVReader reader = new CSVReader(new FileReader(csvFileNameArea));
 
 			reader.readNext();
 			String[] nextLine;
-			LinkUtil lu = new LinkUtil();
 
 			while ((nextLine = reader.readNext()) != null) {
 				// check for valid liens in CSV
 				if (!StringUtils.isBlank(nextLine[AREA_SUBOCEAN])) {
 
 					// add the ocean
-					addHierarchy(oceanGroup, nextLine[AREA_OCEAN]);
-					
-					// add the major area
-					addHierarchy(subOceanGroup, nextLine[AREA_SUBOCEAN]);
-					
-					// add the sub-ocean
-					addHierarchy(majorAreaGroup, nextLine[AREA_AREA]);
-					
-					if (!StringUtils.isBlank(nextLine[AREA_DIVISION])) {
-						addHierarchy(divisionGroup, nextLine[AREA_DIVISION]);
-					}
+					Ro aOcean = findCreateRo(oceanGroup, nextLine[AREA_OCEAN]);
+					oceanGroup.add2Codelist( nextLine[AREA_OCEAN], aOcean);
 
-					if (!StringUtils.isBlank(nextLine[AREA_SUBDIVISION])) {
-						addHierarchy(subDivisionGroup, nextLine[AREA_SUBDIVISION]);
+					// add the sub-ocean
+					Ro subOcean = findCreateRo(subOceanGroup, nextLine[AREA_OCEAN]);
+					findAddGrouping(WATER_AREA, aOcean, subOcean);
+					subOceanGroup.add2Codelist(nextLine[AREA_SUBOCEAN], subOcean);
+
+					// add the major area
+					Ro majorArea = findCreateRo(majorAreaGroup, nextLine[AREA_AREA]);
+					findAddGrouping(WATER_AREA, subOcean, majorArea);
+					majorAreaGroup.add2Codelist(nextLine[AREA_AREA], majorArea);
+
+					// add the sub-area
+					if (!StringUtils.isBlank(nextLine[AREA_SUBAREA])) {
+						Ro subArea = findCreateRo(subAreaGroup, nextLine[AREA_SUBAREA]);
+						findAddGrouping(WATER_AREA, majorArea, subArea);
+						subAreaGroup.add2Codelist(nextLine[AREA_SUBAREA], subArea);
+						
+						if (!StringUtils.isBlank(nextLine[AREA_DIVISION])) {
+							Ro areaDivision = findCreateRo(divisionGroup, nextLine[AREA_DIVISION]);
+							findAddGrouping(WATER_AREA, subArea, areaDivision);
+							divisionGroup.add2Codelist(nextLine[AREA_DIVISION], areaDivision);
+
+							if (!StringUtils.isBlank(nextLine[AREA_SUBDIVISION])) {
+								Ro areaSubDivision = findCreateRo(subDivisionGroup, nextLine[AREA_SUBDIVISION]);
+								findAddGrouping(WATER_AREA, areaDivision, areaSubDivision);
+								subDivisionGroup.add2Codelist(nextLine[AREA_SUBDIVISION], areaSubDivision);
+
+								if (!StringUtils.isBlank(nextLine[AREA_SUBUNIT])) {
+									Ro areaSubUnit = findCreateRo(subUnitGroup, nextLine[AREA_SUBUNIT]);
+									findAddGrouping(WATER_AREA, areaSubDivision, areaSubUnit);
+									subUnitGroup.add2Codelist(nextLine[AREA_SUBUNIT], areaSubUnit);
+								}
+							}
+						}
 					}
-					
-					if (!StringUtils.isBlank(nextLine[AREA_SUBUNIT])) {
-						addHierarchy(subUnitGroup, nextLine[AREA_SUBUNIT]);
+					else {
+						// parent is a major-area, not a sub-area
+						if (!StringUtils.isBlank(nextLine[AREA_DIVISION])) {
+							Ro areaDivision = findCreateRo(divisionGroup, nextLine[AREA_DIVISION]);
+							findAddGrouping(WATER_AREA, majorArea, areaDivision);
+							divisionGroup.add2Codelist(nextLine[AREA_DIVISION], areaDivision);
+
+							if (!StringUtils.isBlank(nextLine[AREA_SUBDIVISION])) {
+								Ro areaSubDivision = findCreateRo(subDivisionGroup, nextLine[AREA_SUBDIVISION]);
+								findAddGrouping(WATER_AREA, areaDivision, areaSubDivision);
+								subDivisionGroup.add2Codelist(nextLine[AREA_SUBDIVISION], areaSubDivision);
+
+								if (!StringUtils.isBlank(nextLine[AREA_SUBUNIT])) {
+									Ro areaSubUnit = findCreateRo(subUnitGroup, nextLine[AREA_SUBUNIT]);
+									findAddGrouping(WATER_AREA, areaSubDivision, areaSubUnit);
+									subUnitGroup.add2Codelist(nextLine[AREA_SUBUNIT], areaSubUnit);
+								}
+							}
+						}
 					}
 				}
 			}
@@ -111,36 +150,38 @@ public class ConceptTest {
 			throw new RefPlusException(e);
 		}
 
-		assertEquals(2, subUnitGroup.getGroups().get("subUnitGroup").size());
-		assertEquals(61, subDivisionGroup.getGroups().get("subDivisionGroup").size());
-		assertEquals(92, subAreaGroup.getGroups().get("subAreaGroup").size());
-		assertEquals(19, majorAreaGroup.getGroups().get("majorAreaGroup").size());
+		assertEquals(2, subUnitGroup.getCodelist().size());
+		assertEquals(61, subDivisionGroup.getCodelist().size());
+		assertEquals(92, subAreaGroup.getCodelist().size());
+		assertEquals(19, majorAreaGroup.getCodelist().size());
 
-		assertEquals(2, subDivisionGroup.getGroupItemByName("subDivisionGroup", "21.5.Z.e").getGroups().get("21.5.Z.e").size());
-		assertEquals(11, subDivisionGroup.getGroupItemByName("subDivisionGroup", "27.3").getGroups().get("27.3").size());
-		assertEquals(7, majorAreaGroup.getGroupItemByName("majorAreaGroup", "21").getGroups().get("21").size());
+		assertEquals(2, subDivisionGroup.locateCodeByName("21.5.Z.e").getGroups().get(WATER_AREA).size());
+		assertEquals(11, subAreaGroup.locateCodeByName("27.3").getGroups().get(WATER_AREA).size());
+		assertEquals(7, majorAreaGroup.locateCodeByName("21").getGroups().get(WATER_AREA).size());
 
 	}
 
-	private void addHierarchy(Ro someGroup, String codeString) {
+	private Ro findCreateRo(Codelist someGroup, String codeString) {
 
 		if (StringUtils.isBlank(codeString))
+			return(null);
+		
+		Ro foundIT = someGroup.locateCodeByName(codeString);
+		if (foundIT != null)
+			return (foundIT);
+		
+		return (new Ro(codeString));
+	}
+	
+	private void findAddGrouping (String hierarchyName, Ro aGroup, Ro aMember) {
+		String name = aMember.getAttribute("name");
+		if (aGroup.getGroupItemByName(hierarchyName, name) != null)
 			return;
 		
-		// get the codelist Ro and create if needed
-		Ro codeElement = codelistWaterArea.getGroupItemByName("codelist", codeString);
-		if (codeElement == null) {
-			codeElement = new Ro(codeString);
-			codelistWaterArea.getGroups().get("codelist").add(codeElement);
-			
-		}
+		if (aGroup.getGroupByName(hierarchyName) == null)
+			aGroup.getGroups().put(hierarchyName, new Vector<Ro>());
 		
-		// check if the Ro already exists in the group
-		String hirarchyName = someGroup.getAttribute("name");
-		if (!someGroup.getGroups().containsKey(hirarchyName)) {
-			Vector<Ro> groups = someGroup.getGroups().get(hirarchyName);
-			groups.add(codeElement);
-		}
+		aGroup.getGroupByName(hierarchyName).add(aMember);
 	}
 
 	/**
@@ -165,7 +206,7 @@ public class ConceptTest {
 	 * 9 Order
 	 * 
 	 * 10 Stats_data
-	 */
+	 *
 
 	@Test
 	public void testConceptSpecies() {
@@ -242,5 +283,5 @@ public class ConceptTest {
 		assertEquals(886, iscaapGroupSpecies.getMap().get(new Ro(iscaapGroupCodeAttributeConcept, "38")).getMemberSet()
 				.size());
 
-	}
+	}*/
 }

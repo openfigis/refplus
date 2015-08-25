@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import org.apache.commons.lang.StringUtils;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -18,15 +20,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Ro {
+public class Codelist {
 
-	public Ro(String attributeName) {
+	public Codelist(String attributeName) {
 		setAttribute("name", attributeName);
 	}
 	
-	private Ro hierarchySource = null;
+	private Codelist hierarchySource = null;
 	
-	private Map<String, Vector<Ro>> groups = new HashMap<String, Vector<Ro>>();
+	private Vector<Ro> codelist = new Vector<Ro>();
 
 	/**
 	 * 
@@ -64,20 +66,23 @@ public class Ro {
 		return (multilangAttributeMap.get(attributeName).get("en"));
 	}
 	
-	public Vector<Ro> getGroupByName (String groupName) {
-		return (groups.get(groupName));
-	}
-	
-	public Ro getGroupItemByName (String groupName, String itemName) {
-		Vector<Ro> aGroup = groups.get(groupName);
-		
-		if (aGroup == null)
-			return (null);
+	public Ro locateCodeByName (String codeName) {
 
-	    for (Ro groupMember : aGroup) {
-	    	if (groupMember.getAttribute("name").equals(itemName))
-	    		return (groupMember);
+		for (Ro someRo : codelist) {
+			if (someRo.getAttribute("name").equals(codeName))
+					return (someRo);
 	    }
 		return (null);
+	}
+	
+	public void add2Codelist(String codeString, Ro theCode) {
+
+		if (StringUtils.isBlank(codeString))
+			return;
+		
+		if (locateCodeByName(codeString) == null) {
+			// the code is not part of the codelist; so add it
+			codelist.add(theCode);
+		}
 	}
 }

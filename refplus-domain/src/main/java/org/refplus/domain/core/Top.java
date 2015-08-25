@@ -5,15 +5,16 @@ import java.util.Vector;
 public class Top {
 
 	
-	Vector<Ro> 			topHierarchies; 	// groups
+	Vector<Codelist> 		topHierarchies = new Vector<Codelist>(); 	// groups
 	
-	Vector<Ro> 			topCodelists;		// codelists
+	Vector<Codelist> 		topCodelists = new Vector<Codelist> ();		// codelists
 	// TODO: add contraints for codelists
 
+	Vector<String> 			hierarchyNames = new Vector<String>();
 
-	public Ro getCodelistByName (String codelistName) {
+	public Codelist getCodelistByName (String codelistName) {
 
-	    for (Ro codeList: topCodelists) {
+	    for (Codelist codeList: topCodelists) {
 	    	if (codeList.getAttribute("name").equals(codeList))
 	    		return (codeList);
 	    }
