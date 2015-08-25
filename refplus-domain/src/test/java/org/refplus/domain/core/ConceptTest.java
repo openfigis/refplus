@@ -121,7 +121,7 @@ public class ConceptTest {
 
 		assertEquals(2, subDivisionSubUnit.getMap().get(new Ro(subDivisionAttributeConcept, "21.5.Z.e")).getMemberSet()
 				.size());
-		assertEquals(11, subAreaSubDivision.getMap().get(new Ro(subAreaAttributeConcept, "27.3")).getMemberSet().size());
+		assertEquals(4, subAreaSubDivision.getMap().get(new Ro(subAreaAttributeConcept, "27.3")).getMemberSet().size());
 		assertEquals(7, majorAreaSubArea.getMap().get(new Ro(majorAreaAttributeConcept, "21")).getMemberSet().size());
 
 	}
