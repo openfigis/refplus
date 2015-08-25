@@ -13,8 +13,8 @@ import org.refplus.RefPlusException;
 import au.com.bytecode.opencsv.CSVReader;
 
 public class ConceptTest {
-	public static String csvFileName = "src/test/resources/CL_SPECIES_1_3.csv";
-	public static String csvFileNameArea = "src/test/resources/CL_PRODUCTION_AREA_0.csv";
+	public static String csvFileSpecies = "src/test/resources/CL_SPECIES_1_3.csv";
+	public static String csvFileArea = "src/test/resources/CL_PRODUCTION_AREA_0.csv";
 
 
 
@@ -48,16 +48,18 @@ public class ConceptTest {
 	@SuppressWarnings("unused")
 	private static int AREA_shape_area = 9;
 	
-	private static String WATER_AREA = "Water Area";
+	private static String HIERARCHY_WATER_AREA = "Water Area";
 
-	private Codelist subUnitGroup      = new Codelist("subUnitGroup");
-	private Codelist subDivisionGroup  = new Codelist("subDivisionGroup");
-	private Codelist divisionGroup     = new Codelist("divisionGroup");
-	private Codelist subAreaGroup      = new Codelist("subAreaGroup");
-	private Codelist majorAreaGroup    = new Codelist("majorAreaGroup");
-	private Codelist subOceanGroup     = new Codelist("subOceanGroup");
-	private Codelist oceanGroup        = new Codelist("oceanGroup");
-	private Codelist codelistWaterArea = new Codelist("codelistWaterArea");
+	private Hierarchy subUnitGroup      = new Hierarchy("subUnitGroup");
+	private Hierarchy subDivisionGroup  = new Hierarchy("subDivisionGroup");
+	private Hierarchy divisionGroup     = new Hierarchy("divisionGroup");
+	private Hierarchy subAreaGroup      = new Hierarchy("subAreaGroup");
+	private Hierarchy majorAreaGroup    = new Hierarchy("majorAreaGroup");
+	private Hierarchy subOceanGroup     = new Hierarchy("subOceanGroup");
+	private Hierarchy oceanGroup        = new Hierarchy("oceanGroup");
+	private Codelist  codelistWaterArea = new Codelist("codelistWaterArea");
+	
+
 	
 	@Test
 	public void testConceptAreas() {
@@ -75,7 +77,7 @@ public class ConceptTest {
 		refplus.topCodelists.add(codelistWaterArea);
 		
 		try {
-			CSVReader reader = new CSVReader(new FileReader(csvFileNameArea));
+			CSVReader reader = new CSVReader(new FileReader(csvFileArea));
 
 			reader.readNext();
 			String[] nextLine;
@@ -86,44 +88,44 @@ public class ConceptTest {
 
 					// add the ocean
 					Ro aOcean = findCreateRo(oceanGroup, nextLine[AREA_OCEAN]);
-					oceanGroup.add2Codelist(aOcean);
+					oceanGroup.add2Hierarchy(aOcean);
 					codelistWaterArea.add2Codelist(aOcean);
 
 					// add the sub-ocean
 					Ro subOcean = findCreateRo(subOceanGroup, nextLine[AREA_OCEAN]);
-					findAddGrouping(WATER_AREA, aOcean, subOcean);
-					subOceanGroup.add2Codelist(subOcean);
+					findAddGrouping(HIERARCHY_WATER_AREA, aOcean, subOcean);
+					subOceanGroup.add2Hierarchy(subOcean);
 					codelistWaterArea.add2Codelist(subOcean);
 
 					// add the major area
 					Ro majorArea = findCreateRo(majorAreaGroup, nextLine[AREA_AREA]);
-					findAddGrouping(WATER_AREA, subOcean, majorArea);
-					majorAreaGroup.add2Codelist(majorArea);
+					findAddGrouping(HIERARCHY_WATER_AREA, subOcean, majorArea);
+					majorAreaGroup.add2Hierarchy(majorArea);
 					codelistWaterArea.add2Codelist(majorArea);
 
 					// add the sub-area
 					if (!StringUtils.isBlank(nextLine[AREA_SUBAREA])) {
 						Ro subArea = findCreateRo(subAreaGroup, nextLine[AREA_SUBAREA]);
-						findAddGrouping(WATER_AREA, majorArea, subArea);
-						subAreaGroup.add2Codelist(subArea);
+						findAddGrouping(HIERARCHY_WATER_AREA, majorArea, subArea);
+						subAreaGroup.add2Hierarchy(subArea);
 						codelistWaterArea.add2Codelist(subArea);
 						
 						if (!StringUtils.isBlank(nextLine[AREA_DIVISION])) {
 							Ro areaDivision = findCreateRo(divisionGroup, nextLine[AREA_DIVISION]);
-							findAddGrouping(WATER_AREA, subArea, areaDivision);
-							divisionGroup.add2Codelist(areaDivision);
+							findAddGrouping(HIERARCHY_WATER_AREA, subArea, areaDivision);
+							divisionGroup.add2Hierarchy(areaDivision);
 							codelistWaterArea.add2Codelist(areaDivision);
 
 							if (!StringUtils.isBlank(nextLine[AREA_SUBDIVISION])) {
 								Ro areaSubDivision = findCreateRo(subDivisionGroup, nextLine[AREA_SUBDIVISION]);
-								findAddGrouping(WATER_AREA, areaDivision, areaSubDivision);
-								subDivisionGroup.add2Codelist(areaSubDivision);
+								findAddGrouping(HIERARCHY_WATER_AREA, areaDivision, areaSubDivision);
+								subDivisionGroup.add2Hierarchy(areaSubDivision);
 								codelistWaterArea.add2Codelist(areaSubDivision);
 
 								if (!StringUtils.isBlank(nextLine[AREA_SUBUNIT])) {
 									Ro areaSubUnit = findCreateRo(subUnitGroup, nextLine[AREA_SUBUNIT]);
-									findAddGrouping(WATER_AREA, areaSubDivision, areaSubUnit);
-									subUnitGroup.add2Codelist(areaSubUnit);
+									findAddGrouping(HIERARCHY_WATER_AREA, areaSubDivision, areaSubUnit);
+									subUnitGroup.add2Hierarchy(areaSubUnit);
 									codelistWaterArea.add2Codelist(areaSubUnit);
 								}
 							}
@@ -133,20 +135,20 @@ public class ConceptTest {
 						// parent is a major-area, not a sub-area
 						if (!StringUtils.isBlank(nextLine[AREA_DIVISION])) {
 							Ro areaDivision = findCreateRo(divisionGroup, nextLine[AREA_DIVISION]);
-							findAddGrouping(WATER_AREA, majorArea, areaDivision);
-							divisionGroup.add2Codelist(areaDivision);
+							findAddGrouping(HIERARCHY_WATER_AREA, majorArea, areaDivision);
+							divisionGroup.add2Hierarchy(areaDivision);
 							codelistWaterArea.add2Codelist(areaDivision);
 
 							if (!StringUtils.isBlank(nextLine[AREA_SUBDIVISION])) {
 								Ro areaSubDivision = findCreateRo(subDivisionGroup, nextLine[AREA_SUBDIVISION]);
-								findAddGrouping(WATER_AREA, areaDivision, areaSubDivision);
-								subDivisionGroup.add2Codelist(areaSubDivision);
+								findAddGrouping(HIERARCHY_WATER_AREA, areaDivision, areaSubDivision);
+								subDivisionGroup.add2Hierarchy(areaSubDivision);
 								codelistWaterArea.add2Codelist(areaSubDivision);
 
 								if (!StringUtils.isBlank(nextLine[AREA_SUBUNIT])) {
 									Ro areaSubUnit = findCreateRo(subUnitGroup, nextLine[AREA_SUBUNIT]);
-									findAddGrouping(WATER_AREA, areaSubDivision, areaSubUnit);
-									subUnitGroup.add2Codelist(areaSubUnit);
+									findAddGrouping(HIERARCHY_WATER_AREA, areaSubDivision, areaSubUnit);
+									subUnitGroup.add2Hierarchy(areaSubUnit);
 									codelistWaterArea.add2Codelist(areaSubUnit);
 								}
 							}
@@ -159,26 +161,26 @@ public class ConceptTest {
 			throw new RefPlusException(e);
 		}
 
-		assertEquals(2, subUnitGroup.getCodelist().size());
-		assertEquals(61, subDivisionGroup.getCodelist().size());
-		assertEquals(92, subAreaGroup.getCodelist().size());
-		assertEquals(19, majorAreaGroup.getCodelist().size());
+		assertEquals(2, subUnitGroup.getHierarchy().size());
+		assertEquals(61, subDivisionGroup.getHierarchy().size());
+		assertEquals(92, subAreaGroup.getHierarchy().size());
+		assertEquals(19, majorAreaGroup.getHierarchy().size());
 		assertEquals(336, codelistWaterArea.getCodelist().size());
 
-		assertEquals(2, subDivisionGroup.locateCodeByName("21.5.Z.e").getGroups().get(WATER_AREA).size());
-		assertEquals(9, divisionGroup.locateCodeByName("27.3.d").getGroups().get(WATER_AREA).size());
+		assertEquals(2, subDivisionGroup.locateHierarchyByName("21.5.Z.e").getGroups().get(HIERARCHY_WATER_AREA).size());
+		assertEquals(9, divisionGroup.locateHierarchyByName("27.3.d").getGroups().get(HIERARCHY_WATER_AREA).size());
 		// NOTE: 27.3 has only 4 divisions, not 11
-		assertEquals(4, subAreaGroup.locateCodeByName("27.3").getGroups().get(WATER_AREA).size());
-		assertEquals(7, majorAreaGroup.locateCodeByName("21").getGroups().get(WATER_AREA).size());
+		assertEquals(4, subAreaGroup.locateHierarchyByName("27.3").getGroups().get(HIERARCHY_WATER_AREA).size());
+		assertEquals(7, majorAreaGroup.locateHierarchyByName("21").getGroups().get(HIERARCHY_WATER_AREA).size());
 
 	}
 
-	private Ro findCreateRo(Codelist someGroup, String codeString) {
+	private Ro findCreateRo(Hierarchy someGroup, String codeString) {
 
 		if (StringUtils.isBlank(codeString))
 			return(null);
 		
-		Ro foundIT = someGroup.locateCodeByName(codeString);
+		Ro foundIT = someGroup.locateHierarchyByName(codeString);
 		if (foundIT != null)
 			return (foundIT);
 		
@@ -197,103 +199,105 @@ public class ConceptTest {
 	}
 
 	/**
-	 * 0 ISSCAAP
-	 * 
+	 * 0 ISSCAAP 
 	 * 1 TAXOCODE
-	 * 
 	 * 2 3A_CODE
-	 * 
 	 * 3 Scientific_name
-	 * 
 	 * 4 English_name
-	 * 
 	 * 5 French_name
-	 * 
 	 * 6 Spanish_name
-	 * 
 	 * 7 Author
-	 * 
-	 * 8 Family
-	 * 
+	 * 8 Family 
 	 * 9 Order
-	 * 
 	 * 10 Stats_data
-	 *
+	 */
+	
+	private static int SPECIES_ISSCAAP = 0;
+	@SuppressWarnings("unused")
+	private static int SPECIES_TAXOCODE = 1;
+	private static int SPECIES_3ACODE = 2;
+	private static int SPECIES_SCIENTIFIC = 3;
+	private static int SPECIES_ENGLISH = 4;
+	private static int SPECIES_FRENCH = 5;
+	private static int SPECIES_SPANISH = 6;
+	private static int SPECIES_AUTHOR = 7;
+	private static int SPECIES_FAMILY = 8;
+	private static int SPECIES_ORDER = 9;
+
+	private static String ATTRIB_3ALFA = "3AlfaCODE";
+	private static String ATTRIB_SCIENTIFIC_NAME = "Scientific Name";
+	private static String ATTRIB_ML_NAME = "Multilingual Name";
+	private static String ATTRIB_AUTHOR = "Author";
+
+	private static String HIERARCHY_FAMILY = "Family";
+	private static String HIERARCHY_ORDER = "Order";
+	private static String HIERARCHY_ISSCAAP = "ISSCAAP";
+	
+	private Hierarchy familyHierarchy     = new Hierarchy("familyCodeAttributeConcept");
+	private Hierarchy orderHierarchy      = new Hierarchy("orderCodeAttributeConcept");
+	private Hierarchy iscaapHierarchy     = new Hierarchy("iscaapGroupCodeAttributeConcept");
+	private Codelist  speciesCodelist     = new Codelist("Species");
 
 	@Test
 	public void testConceptSpecies() {
-		AttributeDefinition alpha3CodeConcept = new AttributeDefinition();
-		Vector<AttributeDefinition> alpha3List = new Vector<AttributeDefinition>();
-		alpha3List.add(alpha3CodeConcept);
-		Concept speciesConcept = new Concept(new Vector<Ro>(), alpha3List);
-
-		AttributeDefinition asfisDescriptionConcept = new AttributeDefinition();
-
-		AttributeDefinition familyCodeAttributeConcept = new AttributeDefinition();
-		Vector<AttributeDefinition> familyList = new Vector<AttributeDefinition>();
-		familyList.add(familyCodeAttributeConcept);
-		Concept familyConcept = new Concept(new Vector<Ro>(), familyList);
-
-		AttributeDefinition orderCodeAttributeConcept = new AttributeDefinition();
-		Vector<AttributeDefinition> orderList = new Vector<AttributeDefinition>();
-		orderList.add(orderCodeAttributeConcept);
-		Concept orderConcept = new Concept(new Vector<Ro>(), orderList);
-
-		AttributeDefinition iscaapGroupCodeAttributeConcept = new AttributeDefinition();
-		Vector<AttributeDefinition> iscaapGroupList = new Vector<AttributeDefinition>();
-		iscaapGroupList.add(iscaapGroupCodeAttributeConcept);
-		Concept iscaapGroupConcept = new Concept(new Vector<Ro>(), iscaapGroupList);
-
-		Group familySpecies = new Group(familyConcept, speciesConcept);
-		Group orderFamily = new Group(orderConcept, familyConcept);
-		Group iscaapGroupSpecies = new Group(orderConcept, familyConcept);
-
+	
+		Top refplus = new Top();
+		refplus.topHierarchies.add(familyHierarchy);
+		refplus.topHierarchies.add(orderHierarchy);
+		refplus.topHierarchies.add(iscaapHierarchy);
+		refplus.topCodelists.add(speciesCodelist);
+			
 		try {
-			CSVReader reader = new CSVReader(new FileReader(csvFileName), '\t');
+			CSVReader reader = new CSVReader(new FileReader(csvFileSpecies), '\t');
 
 			reader.readNext();
 			String[] nextLine;
-			LinkUtil lu = new LinkUtil();
 
 			while ((nextLine = reader.readNext()) != null) {
 
-				if (!StringUtils.isBlank(nextLine[2])) {
+				if (!StringUtils.isBlank(nextLine[SPECIES_3ACODE])) {
 
-					Code alpha3 = new Code(nextLine[2]);
+					Ro species = new Ro(nextLine[SPECIES_3ACODE]);
+					species.setAttributeML(ATTRIB_ML_NAME, Lang.EN, nextLine[SPECIES_ENGLISH]);
+					species.setAttributeML(ATTRIB_ML_NAME, Lang.FR, nextLine[SPECIES_FRENCH]);
+					species.setAttributeML(ATTRIB_ML_NAME, Lang.SP, nextLine[SPECIES_SPANISH]);
+					species.getCodeMap().put(ATTRIB_3ALFA, nextLine[SPECIES_3ACODE]);
+					species.getAttributeMap().put(ATTRIB_SCIENTIFIC_NAME, nextLine[SPECIES_SCIENTIFIC]);
+					species.getAttributeMap().put(ATTRIB_AUTHOR, nextLine[SPECIES_AUTHOR]);
+					
+					speciesCodelist.add2Codelist(species);
 
-					MultiLingualString mls = u.english(nextLine[4]);
-					u.addLanguage(Lang.FR, mls, nextLine[5]);
-					u.addLanguage(Lang.ES, mls, nextLine[6]);
-					u.addLanguage(Lang.LA, mls, nextLine[3]);
-					Ro species = new Ro(alpha3CodeConcept, alpha3, asfisDescriptionConcept, mls);
-					speciesConcept.getRoList().add(species);
-
-					Ro family = new Ro(familyCodeAttributeConcept, nextLine[8]);
-					Ro order = new Ro(orderCodeAttributeConcept, nextLine[9]);
-					Ro iscaapGroup = new Ro(iscaapGroupCodeAttributeConcept, nextLine[0]);
-
-					lu.buildGroup(familyConcept, familySpecies, family, species);
-					lu.buildGroup(orderConcept, orderFamily, order, family);
-					lu.buildGroup(iscaapGroupConcept, iscaapGroupSpecies, iscaapGroup, species);
-
+					if (!StringUtils.isBlank(nextLine[SPECIES_FAMILY])) {
+						Ro family = findCreateRo(familyHierarchy, nextLine[SPECIES_FAMILY]);
+						findAddGrouping(HIERARCHY_FAMILY, family, species);
+						familyHierarchy.add2Hierarchy(family);
+					}
+					if (!StringUtils.isBlank(nextLine[SPECIES_ORDER])) {
+						Ro order = findCreateRo(orderHierarchy, nextLine[SPECIES_ORDER]);
+						findAddGrouping(HIERARCHY_ORDER, order, species);
+						orderHierarchy.add2Hierarchy(order);
+					}
+					if (!StringUtils.isBlank(nextLine[SPECIES_ISSCAAP])) {
+						Ro isscaap = findCreateRo(iscaapHierarchy, nextLine[SPECIES_ISSCAAP]);
+						findAddGrouping(HIERARCHY_ISSCAAP, isscaap, species);
+						iscaapHierarchy.add2Hierarchy(isscaap);
+					}
 				}
 			}
 
 			reader.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			throw new RefPlusException(e);
 		}
 
-		assertEquals(12560, speciesConcept.getRoList().size());
-		assertEquals(980, familyConcept.getRoList().size());
-		assertEquals(140, orderConcept.getRoList().size());
-		assertEquals(51, iscaapGroupConcept.getRoList().size());
-		assertEquals(37, familySpecies.getMap().get(new Ro(familyCodeAttributeConcept, "Petromyzontidae"))
-				.getMemberSet().size());
-		assertEquals(6, orderFamily.getMap().get(new Ro(orderCodeAttributeConcept, "SQUALIFORMES")).getMemberSet()
-				.size());
-		assertEquals(886, iscaapGroupSpecies.getMap().get(new Ro(iscaapGroupCodeAttributeConcept, "38")).getMemberSet()
-				.size());
-
-	}*/
+		assertEquals(12560, speciesCodelist.getCodelist().size());
+		assertEquals(979, familyHierarchy.getHierarchy().size());
+		assertEquals(140, orderHierarchy.getHierarchy().size());
+		assertEquals(50, iscaapHierarchy.getHierarchy().size());	// 51
+		
+		assertEquals(37, familyHierarchy.locateHierarchyByName("Petromyzontidae").getGroups().get(HIERARCHY_FAMILY).size());
+		assertEquals(114, orderHierarchy.locateHierarchyByName("SQUALIFORMES").getGroups().get(HIERARCHY_ORDER).size());	// 6
+		assertEquals(886, iscaapHierarchy.locateHierarchyByName("38").getGroups().get(HIERARCHY_ISSCAAP).size());
+		
+	}
 }

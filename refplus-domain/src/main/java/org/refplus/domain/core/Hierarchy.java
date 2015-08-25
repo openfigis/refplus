@@ -20,19 +20,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Codelist {
+public class Hierarchy {
 
-	public Codelist(String attributeName) {
+	public Hierarchy(String attributeName) {
 		setAttribute("name", attributeName);
 	}
 	
-	private Codelist hierarchySource = null;
+	private Hierarchy hierarchySource = null;
 	
-	private Vector<Ro> codelist = new Vector<Ro>();
+	private Vector<Ro> hierarchy = new Vector<Ro>();
 
 	/**
 	 * 
-	 * Codelist is a list of reference objects (Ro's)
+	 * Hierarchy is a grouping of reference objects (Ro's)
 	 */
 	private Map<String, String> attributeMap = new HashMap<String, String>();
 	private Map<String,  Map<String, String>> multilangAttributeMap = new HashMap<String,  Map<String, String>>();
@@ -58,24 +58,25 @@ public class Codelist {
 		return (multilangAttributeMap.get(attributeName).get("en"));
 	}
 	
-	public Ro locateCodeByName (String codeName) {
+	public Ro locateHierarchyByName (String codeName) {
 
-		for (Ro someRo : codelist) {
+		for (Ro someRo : hierarchy) {
 			if (someRo.getAttribute("name").equals(codeName))
 					return (someRo);
 	    }
 		return (null);
 	}
 	
-	public void add2Codelist(Ro theCode) {
+	public void add2Hierarchy(Ro theCode) {
 
 		String codeString = theCode.getAttribute("name");
 		if (codeString == null || StringUtils.isBlank(codeString))
 			return;
 		
-		if (locateCodeByName(codeString) == null) {
+		if (locateHierarchyByName(codeString) == null) {
 			// the code is not part of the codelist; so add it
-			codelist.add(theCode);
+			hierarchy.add(theCode);
 		}
 	}
+
 }

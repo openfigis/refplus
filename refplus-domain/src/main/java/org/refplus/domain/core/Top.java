@@ -5,7 +5,7 @@ import java.util.Vector;
 public class Top {
 
 	
-	Vector<Codelist> 		topHierarchies = new Vector<Codelist>(); 	// groups
+	Vector<Hierarchy> 		topHierarchies = new Vector<Hierarchy>(); 	// groups
 	
 	Vector<Codelist> 		topCodelists = new Vector<Codelist> ();		// codelists
 	// TODO: add contraints for codelists
