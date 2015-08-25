@@ -75,9 +75,10 @@ public class Codelist {
 		return (null);
 	}
 	
-	public void add2Codelist(String codeString, Ro theCode) {
+	public void add2Codelist(Ro theCode) {
 
-		if (StringUtils.isBlank(codeString))
+		String codeString = theCode.getAttribute("name");
+		if (codeString == null || StringUtils.isBlank(codeString))
 			return;
 		
 		if (locateCodeByName(codeString) == null) {

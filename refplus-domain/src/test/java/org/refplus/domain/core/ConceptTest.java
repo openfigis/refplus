@@ -73,7 +73,6 @@ public class ConceptTest {
 		refplus.topHierarchies.add(subOceanGroup);
 		refplus.topHierarchies.add(oceanGroup);
 		refplus.topCodelists.add(codelistWaterArea);
-		refplus.hierarchyNames.add(WATER_AREA);
 		
 		try {
 			CSVReader reader = new CSVReader(new FileReader(csvFileNameArea));
@@ -87,38 +86,45 @@ public class ConceptTest {
 
 					// add the ocean
 					Ro aOcean = findCreateRo(oceanGroup, nextLine[AREA_OCEAN]);
-					oceanGroup.add2Codelist( nextLine[AREA_OCEAN], aOcean);
+					oceanGroup.add2Codelist(aOcean);
+					codelistWaterArea.add2Codelist(aOcean);
 
 					// add the sub-ocean
 					Ro subOcean = findCreateRo(subOceanGroup, nextLine[AREA_OCEAN]);
 					findAddGrouping(WATER_AREA, aOcean, subOcean);
-					subOceanGroup.add2Codelist(nextLine[AREA_SUBOCEAN], subOcean);
+					subOceanGroup.add2Codelist(subOcean);
+					codelistWaterArea.add2Codelist(subOcean);
 
 					// add the major area
 					Ro majorArea = findCreateRo(majorAreaGroup, nextLine[AREA_AREA]);
 					findAddGrouping(WATER_AREA, subOcean, majorArea);
-					majorAreaGroup.add2Codelist(nextLine[AREA_AREA], majorArea);
+					majorAreaGroup.add2Codelist(majorArea);
+					codelistWaterArea.add2Codelist(majorArea);
 
 					// add the sub-area
 					if (!StringUtils.isBlank(nextLine[AREA_SUBAREA])) {
 						Ro subArea = findCreateRo(subAreaGroup, nextLine[AREA_SUBAREA]);
 						findAddGrouping(WATER_AREA, majorArea, subArea);
-						subAreaGroup.add2Codelist(nextLine[AREA_SUBAREA], subArea);
+						subAreaGroup.add2Codelist(subArea);
+						codelistWaterArea.add2Codelist(subArea);
 						
 						if (!StringUtils.isBlank(nextLine[AREA_DIVISION])) {
 							Ro areaDivision = findCreateRo(divisionGroup, nextLine[AREA_DIVISION]);
 							findAddGrouping(WATER_AREA, subArea, areaDivision);
-							divisionGroup.add2Codelist(nextLine[AREA_DIVISION], areaDivision);
+							divisionGroup.add2Codelist(areaDivision);
+							codelistWaterArea.add2Codelist(areaDivision);
 
 							if (!StringUtils.isBlank(nextLine[AREA_SUBDIVISION])) {
 								Ro areaSubDivision = findCreateRo(subDivisionGroup, nextLine[AREA_SUBDIVISION]);
 								findAddGrouping(WATER_AREA, areaDivision, areaSubDivision);
-								subDivisionGroup.add2Codelist(nextLine[AREA_SUBDIVISION], areaSubDivision);
+								subDivisionGroup.add2Codelist(areaSubDivision);
+								codelistWaterArea.add2Codelist(areaSubDivision);
 
 								if (!StringUtils.isBlank(nextLine[AREA_SUBUNIT])) {
 									Ro areaSubUnit = findCreateRo(subUnitGroup, nextLine[AREA_SUBUNIT]);
 									findAddGrouping(WATER_AREA, areaSubDivision, areaSubUnit);
-									subUnitGroup.add2Codelist(nextLine[AREA_SUBUNIT], areaSubUnit);
+									subUnitGroup.add2Codelist(areaSubUnit);
+									codelistWaterArea.add2Codelist(areaSubUnit);
 								}
 							}
 						}
@@ -128,17 +134,20 @@ public class ConceptTest {
 						if (!StringUtils.isBlank(nextLine[AREA_DIVISION])) {
 							Ro areaDivision = findCreateRo(divisionGroup, nextLine[AREA_DIVISION]);
 							findAddGrouping(WATER_AREA, majorArea, areaDivision);
-							divisionGroup.add2Codelist(nextLine[AREA_DIVISION], areaDivision);
+							divisionGroup.add2Codelist(areaDivision);
+							codelistWaterArea.add2Codelist(areaDivision);
 
 							if (!StringUtils.isBlank(nextLine[AREA_SUBDIVISION])) {
 								Ro areaSubDivision = findCreateRo(subDivisionGroup, nextLine[AREA_SUBDIVISION]);
 								findAddGrouping(WATER_AREA, areaDivision, areaSubDivision);
-								subDivisionGroup.add2Codelist(nextLine[AREA_SUBDIVISION], areaSubDivision);
+								subDivisionGroup.add2Codelist(areaSubDivision);
+								codelistWaterArea.add2Codelist(areaSubDivision);
 
 								if (!StringUtils.isBlank(nextLine[AREA_SUBUNIT])) {
 									Ro areaSubUnit = findCreateRo(subUnitGroup, nextLine[AREA_SUBUNIT]);
 									findAddGrouping(WATER_AREA, areaSubDivision, areaSubUnit);
-									subUnitGroup.add2Codelist(nextLine[AREA_SUBUNIT], areaSubUnit);
+									subUnitGroup.add2Codelist(areaSubUnit);
+									codelistWaterArea.add2Codelist(areaSubUnit);
 								}
 							}
 						}
@@ -154,9 +163,12 @@ public class ConceptTest {
 		assertEquals(61, subDivisionGroup.getCodelist().size());
 		assertEquals(92, subAreaGroup.getCodelist().size());
 		assertEquals(19, majorAreaGroup.getCodelist().size());
+		assertEquals(336, codelistWaterArea.getCodelist().size());
 
 		assertEquals(2, subDivisionGroup.locateCodeByName("21.5.Z.e").getGroups().get(WATER_AREA).size());
-		assertEquals(11, subAreaGroup.locateCodeByName("27.3").getGroups().get(WATER_AREA).size());
+		assertEquals(9, divisionGroup.locateCodeByName("27.3.d").getGroups().get(WATER_AREA).size());
+		// NOTE: 27.3 has only 4 divisions, not 11
+		assertEquals(4, subAreaGroup.locateCodeByName("27.3").getGroups().get(WATER_AREA).size());
 		assertEquals(7, majorAreaGroup.locateCodeByName("21").getGroups().get(WATER_AREA).size());
 
 	}

@@ -10,8 +10,6 @@ public class Top {
 	Vector<Codelist> 		topCodelists = new Vector<Codelist> ();		// codelists
 	// TODO: add contraints for codelists
 
-	Vector<String> 			hierarchyNames = new Vector<String>();
-
 	public Codelist getCodelistByName (String codelistName) {
 
 	    for (Codelist codeList: topCodelists) {
