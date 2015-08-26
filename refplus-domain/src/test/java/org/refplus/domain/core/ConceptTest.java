@@ -119,9 +119,10 @@ public class ConceptTest {
 		assertEquals(92, subAreaConcept.getRoList().size());
 		assertEquals(19, majorAreaConcept.getRoList().size());
 
-		assertEquals(2, subDivisionSubUnit.getMap().get(new Ro(subDivisionAttributeConcept, "21.5.Z.e")).getMemberSet()
-				.size());
-		assertEquals(4, subAreaSubDivision.getMap().get(new Ro(subAreaAttributeConcept, "27.3")).getMemberSet().size());
+		assertEquals(2,
+				subDivisionSubUnit.getMap().get(new Ro(subDivisionAttributeConcept, "21.5.Z.e")).getMemberSet().size());
+		assertEquals(11,
+				subAreaSubDivision.getMap().get(new Ro(subAreaAttributeConcept, "27.3")).getMemberSet().size());
 		assertEquals(7, majorAreaSubArea.getMap().get(new Ro(majorAreaAttributeConcept, "21")).getMemberSet().size());
 
 	}
@@ -197,14 +198,25 @@ public class ConceptTest {
 					u.addLanguage(Lang.LA, mls, nextLine[3]);
 					Ro species = new Ro(alpha3CodeConcept, alpha3, asfisDescriptionConcept, mls);
 					speciesConcept.getRoList().add(species);
+					Ro order = null;
+					if (!StringUtils.isBlank(nextLine[9])) {
+						order = new Ro(orderCodeAttributeConcept, nextLine[9]);
+						if (!orderConcept.getRoList().contains(order)) {
+							orderConcept.getRoList().add(order);
+						}
+					}
+					if (!StringUtils.isBlank(nextLine[8])) {
+						Ro family = new Ro(familyCodeAttributeConcept, nextLine[8]);
+						lu.buildGroup(familyConcept, familySpecies, family, species);
+						if (order != null) {
+							lu.buildGroup(orderConcept, orderFamily, order, family);
+						}
+					}
 
-					Ro family = new Ro(familyCodeAttributeConcept, nextLine[8]);
-					Ro order = new Ro(orderCodeAttributeConcept, nextLine[9]);
-					Ro iscaapGroup = new Ro(iscaapGroupCodeAttributeConcept, nextLine[0]);
-
-					lu.buildGroup(familyConcept, familySpecies, family, species);
-					lu.buildGroup(orderConcept, orderFamily, order, family);
-					lu.buildGroup(iscaapGroupConcept, iscaapGroupSpecies, iscaapGroup, species);
+					if (!StringUtils.isBlank(nextLine[0])) {
+						Ro iscaapGroup = new Ro(iscaapGroupCodeAttributeConcept, nextLine[0]);
+						lu.buildGroup(iscaapGroupConcept, iscaapGroupSpecies, iscaapGroup, species);
+					}
 
 				}
 			}
@@ -215,15 +227,20 @@ public class ConceptTest {
 		}
 
 		assertEquals(12560, speciesConcept.getRoList().size());
+
+		// there is an empty group with an order and relates to a species.("37
+		// ""1520300101"" ""LEK"" ""Eumecichthys fiski"" ""Unicorn crestfish""
+		// ""(Günther 1890)"" ""Lophotidae"" ""LAMPRIFORMES"" 0" )
 		assertEquals(979, familyConcept.getRoList().size());
+
 		assertEquals(140, orderConcept.getRoList().size());
 		assertEquals(50, iscaapGroupConcept.getRoList().size());
 		assertEquals(37, familySpecies.getMap().get(new Ro(familyCodeAttributeConcept, "Petromyzontidae"))
 				.getMemberSet().size());
-		assertEquals(114, orderFamily.getMap().get(new Ro(orderCodeAttributeConcept, "SQUALIFORMES")).getMemberSet()
-				.size());
-		assertEquals(886, iscaapGroupSpecies.getMap().get(new Ro(iscaapGroupCodeAttributeConcept, "38")).getMemberSet()
-				.size());
+		assertEquals(5,
+				orderFamily.getMap().get(new Ro(orderCodeAttributeConcept, "SQUALIFORMES")).getMemberSet().size());
+		assertEquals(886,
+				iscaapGroupSpecies.getMap().get(new Ro(iscaapGroupCodeAttributeConcept, "38")).getMemberSet().size());
 
 	}
 }
