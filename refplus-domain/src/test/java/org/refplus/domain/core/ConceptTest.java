@@ -131,29 +131,6 @@ public class ConceptTest {
 							}
 						}
 					}
-					else {
-						// parent is a major-area, not a sub-area
-						if (!StringUtils.isBlank(nextLine[AREA_DIVISION])) {
-							Ro areaDivision = findCreateRo(divisionGroup, nextLine[AREA_DIVISION]);
-							findAddGrouping(HIERARCHY_WATER_AREA, majorArea, areaDivision);
-							divisionGroup.add2Hierarchy(areaDivision);
-							codelistWaterArea.add2Codelist(areaDivision);
-
-							if (!StringUtils.isBlank(nextLine[AREA_SUBDIVISION])) {
-								Ro areaSubDivision = findCreateRo(subDivisionGroup, nextLine[AREA_SUBDIVISION]);
-								findAddGrouping(HIERARCHY_WATER_AREA, areaDivision, areaSubDivision);
-								subDivisionGroup.add2Hierarchy(areaSubDivision);
-								codelistWaterArea.add2Codelist(areaSubDivision);
-
-								if (!StringUtils.isBlank(nextLine[AREA_SUBUNIT])) {
-									Ro areaSubUnit = findCreateRo(subUnitGroup, nextLine[AREA_SUBUNIT]);
-									findAddGrouping(HIERARCHY_WATER_AREA, areaSubDivision, areaSubUnit);
-									subUnitGroup.add2Hierarchy(areaSubUnit);
-									codelistWaterArea.add2Codelist(areaSubUnit);
-								}
-							}
-						}
-					}
 				}
 			}
 			reader.close();
