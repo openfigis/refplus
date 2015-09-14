@@ -7,14 +7,14 @@ public class Top {
 	
 	Vector<Hierarchy> 		topHierarchies = new Vector<Hierarchy>(); 	// groups
 	
-	Vector<Codelist> 		topCodelists = new Vector<Codelist> ();		// codelists
-	// TODO: add contraints for codelists
+	Vector<Concept> 		topConcepts = new Vector<Concept> ();		// concepts
+	// TODO: add constraints for codelists
 
-	public Codelist getCodelistByName (String codelistName) {
+	public Concept getConceptByName (String codelistName) {
 
-	    for (Codelist codeList: topCodelists) {
-	    	if (codeList.getAttribute("name").equals(codeList))
-	    		return (codeList);
+	    for (Concept aConcept: topConcepts) {
+	    	if (aConcept.getAttribute("name").equals(aConcept))
+	    		return (aConcept);
 	    }
 		return (null);
 	}
