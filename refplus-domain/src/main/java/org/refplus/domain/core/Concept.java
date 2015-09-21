@@ -65,7 +65,7 @@ public class Concept {
 		return (null);
 	}
 	
-	public void add2Concept(Ro theCode) {
+	public void add2ConceptCheckDuplicates(Ro theCode) {
 
 		String codeString = theCode.getAttribute("name");
 		if (codeString == null || StringUtils.isBlank(codeString))
@@ -75,5 +75,11 @@ public class Concept {
 			// the code is not part of the Concept; so add it
 			conceptlist.add(theCode);
 		}
+	}
+	
+	public void add2Concept(Ro theCode) {
+
+		conceptlist.add(theCode);
+
 	}
 }

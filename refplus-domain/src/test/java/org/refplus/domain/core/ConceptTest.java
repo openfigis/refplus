@@ -89,44 +89,44 @@ public class ConceptTest {
 					// add the ocean
 					Ro aOcean = findCreateRo(oceanGroup, nextLine[AREA_OCEAN]);
 					oceanGroup.add2Hierarchy(aOcean);
-					codelistWaterArea.add2Concept(aOcean);
+					codelistWaterArea.add2ConceptCheckDuplicates(aOcean);
 
 					// add the sub-ocean
 					Ro subOcean = findCreateRo(subOceanGroup, nextLine[AREA_OCEAN]);
 					findAddGrouping(HIERARCHY_WATER_AREA, aOcean, subOcean);
 					subOceanGroup.add2Hierarchy(subOcean);
-					codelistWaterArea.add2Concept(subOcean);
+					codelistWaterArea.add2ConceptCheckDuplicates(subOcean);
 
 					// add the major area
 					Ro majorArea = findCreateRo(majorAreaGroup, nextLine[AREA_AREA]);
 					findAddGrouping(HIERARCHY_WATER_AREA, subOcean, majorArea);
 					majorAreaGroup.add2Hierarchy(majorArea);
-					codelistWaterArea.add2Concept(majorArea);
+					codelistWaterArea.add2ConceptCheckDuplicates(majorArea);
 
 					// add the sub-area
 					if (!StringUtils.isBlank(nextLine[AREA_SUBAREA])) {
 						Ro subArea = findCreateRo(subAreaGroup, nextLine[AREA_SUBAREA]);
 						findAddGrouping(HIERARCHY_WATER_AREA, majorArea, subArea);
 						subAreaGroup.add2Hierarchy(subArea);
-						codelistWaterArea.add2Concept(subArea);
+						codelistWaterArea.add2ConceptCheckDuplicates(subArea);
 						
 						if (!StringUtils.isBlank(nextLine[AREA_DIVISION])) {
 							Ro areaDivision = findCreateRo(divisionGroup, nextLine[AREA_DIVISION]);
 							findAddGrouping(HIERARCHY_WATER_AREA, subArea, areaDivision);
 							divisionGroup.add2Hierarchy(areaDivision);
-							codelistWaterArea.add2Concept(areaDivision);
+							codelistWaterArea.add2ConceptCheckDuplicates(areaDivision);
 
 							if (!StringUtils.isBlank(nextLine[AREA_SUBDIVISION])) {
 								Ro areaSubDivision = findCreateRo(subDivisionGroup, nextLine[AREA_SUBDIVISION]);
 								findAddGrouping(HIERARCHY_WATER_AREA, areaDivision, areaSubDivision);
 								subDivisionGroup.add2Hierarchy(areaSubDivision);
-								codelistWaterArea.add2Concept(areaSubDivision);
+								codelistWaterArea.add2ConceptCheckDuplicates(areaSubDivision);
 
 								if (!StringUtils.isBlank(nextLine[AREA_SUBUNIT])) {
 									Ro areaSubUnit = findCreateRo(subUnitGroup, nextLine[AREA_SUBUNIT]);
 									findAddGrouping(HIERARCHY_WATER_AREA, areaSubDivision, areaSubUnit);
 									subUnitGroup.add2Hierarchy(areaSubUnit);
-									codelistWaterArea.add2Concept(areaSubUnit);
+									codelistWaterArea.add2ConceptCheckDuplicates(areaSubUnit);
 								}
 							}
 						}
@@ -241,7 +241,7 @@ public class ConceptTest {
 					species.getCodeMap().put(ATTRIB_3ALFA, nextLine[SPECIES_3ACODE]);
 					species.getAttributeMap().put(ATTRIB_SCIENTIFIC_NAME, nextLine[SPECIES_SCIENTIFIC]);
 					species.getAttributeMap().put(ATTRIB_AUTHOR, nextLine[SPECIES_AUTHOR]);
-					
+
 					speciesCodelist.add2Concept(species);
 
 					if (!StringUtils.isBlank(nextLine[SPECIES_FAMILY])) {
