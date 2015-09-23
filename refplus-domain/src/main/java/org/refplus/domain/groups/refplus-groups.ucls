@@ -10,8 +10,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="org.refplus.domain.groups.Link" project="refplus-domain" 
-    file="/refplus-domain/src/main/java/org/refplus/domain/groups/Link.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="org.refplus.domain.groups.Groupp" project="refplus-domain" 
+    file="/refplus-domain/src/main/java/org/refplus/domain/groups/Group.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="266" y="403"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

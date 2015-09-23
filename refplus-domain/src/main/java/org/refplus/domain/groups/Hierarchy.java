@@ -25,13 +25,13 @@ public class Hierarchy extends SingleCoded {
 	private Concept source;
 	private Concept target;
 
-	private Map<Ro, Link> map;
+	private Map<Ro, Group> map;
 
 	public Hierarchy(Concept source, Concept target) {
 		super();
 		this.source = source;
 		this.target = target;
-		this.map = new HashMap<Ro, Link>();
+		this.map = new HashMap<Ro, Group>();
 	}
 
 }

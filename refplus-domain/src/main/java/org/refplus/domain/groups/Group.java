@@ -24,12 +24,12 @@ import org.refplus.domain.core.Ro;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Link {
+public class Group {
 
 	/**
 	 * Constructor to create a link with already a first element.
 	 */
-	public Link(Ro destination) {
+	public Group(Ro destination) {
 		memberSet = new HashSet<Ro>();
 		memberSet.add(destination);
 	}
