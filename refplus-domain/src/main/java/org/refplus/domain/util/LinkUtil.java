@@ -4,7 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.refplus.domain.core.AttributeDefinition;
 import org.refplus.domain.core.Concept;
 import org.refplus.domain.core.Ro;
-import org.refplus.domain.groups.Group;
+import org.refplus.domain.groups.Hierarchy;
 import org.refplus.domain.groups.Link;
 
 public class LinkUtil {
@@ -16,11 +16,11 @@ public class LinkUtil {
 	 * 
 	 * 
 	 * @param higherLevelConcept
-	 * @param group
+	 * @param hierarchy
 	 * @param higherLevelRo
 	 * @param ro
 	 */
-	public void buildGroup(Concept higherLevelConcept, Group group, Ro higherLevelRo, Ro ro) {
+	public void buildHierarchy(Concept higherLevelConcept, Hierarchy hierarchy, Ro higherLevelRo, Ro ro) {
 
 		// check whether this one is already in the list
 		if (!higherLevelConcept.getRoList().contains(higherLevelRo)) {
@@ -28,14 +28,14 @@ public class LinkUtil {
 			higherLevelConcept.getRoList().add(higherLevelRo);
 		}
 
-		// check whether a group exists for the higherLevelRo
-		if (!group.getMap().containsKey(higherLevelRo)) {
+		// check whether a hierarchy exists for the higherLevelRo
+		if (!hierarchy.getMap().containsKey(higherLevelRo)) {
 			// if not, create it
 			Link link = new Link(ro);
-			group.getMap().put(higherLevelRo, link);
+			hierarchy.getMap().put(higherLevelRo, link);
 		}
 		// add the relation ro-higherLevelRoCode
-		group.getMap().get(higherLevelRo).getMemberSet().add(ro);
+		hierarchy.getMap().get(higherLevelRo).getMemberSet().add(ro);
 
 	}
 

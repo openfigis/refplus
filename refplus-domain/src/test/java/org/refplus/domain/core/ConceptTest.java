@@ -9,7 +9,7 @@ import java.util.Vector;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.refplus.RefPlusException;
-import org.refplus.domain.groups.Group;
+import org.refplus.domain.groups.Hierarchy;
 import org.refplus.domain.util.Lang;
 import org.refplus.domain.util.LinkUtil;
 import org.refplus.domain.util.MultiLingualStringUtil;
@@ -71,10 +71,10 @@ public class ConceptTest {
 		majorAreaAttributeDefinitionList.add(majorAreaAttributeConcept);
 		Concept majorAreaConcept = new Concept(new Vector<Ro>(), majorAreaAttributeDefinitionList);
 
-		Group subDivisionSubUnit = new Group(subDivisionConcept, subunitConcept);
-		Group subAreaSubDivision = new Group(subDivisionConcept, subAreaConcept);
-		Group divisionSubDivision = new Group(subDivisionConcept, subAreaConcept);
-		Group majorAreaSubArea = new Group(subAreaConcept, majorAreaConcept);
+		Hierarchy subDivisionSubUnit = new Hierarchy(subDivisionConcept, subunitConcept);
+		Hierarchy subAreaSubDivision = new Hierarchy(subDivisionConcept, subAreaConcept);
+		Hierarchy divisionSubDivision = new Hierarchy(subDivisionConcept, subAreaConcept);
+		Hierarchy majorAreaSubArea = new Hierarchy(subAreaConcept, majorAreaConcept);
 
 		try {
 			CSVReader reader = new CSVReader(new FileReader(csvFileNameArea));
@@ -93,17 +93,17 @@ public class ConceptTest {
 					Ro subDivision = lu.addCodeAsRo(subDivisionConcept, subDivisionAttributeConcept, nextLine[7]);
 
 					if (subDivision != null && subunit != null) {
-						lu.buildGroup(subDivisionConcept, subDivisionSubUnit, subDivision, subunit);
+						lu.buildHierarchy(subDivisionConcept, subDivisionSubUnit, subDivision, subunit);
 					}
 
 					Ro subArea = lu.addCodeAsRo(subAreaConcept, subAreaAttributeConcept, nextLine[4]);
 					if (subArea != null && subDivision != null) {
-						lu.buildGroup(subAreaConcept, subAreaSubDivision, subArea, subDivision);
+						lu.buildHierarchy(subAreaConcept, subAreaSubDivision, subArea, subDivision);
 					}
 
 					Ro majorArea = lu.addCodeAsRo(majorAreaConcept, majorAreaAttributeConcept, nextLine[3]);
 					if (majorArea != null && subArea != null) {
-						lu.buildGroup(majorAreaConcept, majorAreaSubArea, majorArea, subArea);
+						lu.buildHierarchy(majorAreaConcept, majorAreaSubArea, majorArea, subArea);
 					}
 
 				}
@@ -175,9 +175,9 @@ public class ConceptTest {
 		iscaapGroupList.add(iscaapGroupCodeAttributeConcept);
 		Concept iscaapGroupConcept = new Concept(new Vector<Ro>(), iscaapGroupList);
 
-		Group familySpecies = new Group(familyConcept, speciesConcept);
-		Group orderFamily = new Group(orderConcept, familyConcept);
-		Group iscaapGroupSpecies = new Group(orderConcept, familyConcept);
+		Hierarchy familySpecies = new Hierarchy(familyConcept, speciesConcept);
+		Hierarchy orderFamily = new Hierarchy(orderConcept, familyConcept);
+		Hierarchy iscaapGroupSpecies = new Hierarchy(orderConcept, familyConcept);
 
 		try {
 			CSVReader reader = new CSVReader(new FileReader(csvFileName), '\t');
@@ -207,15 +207,15 @@ public class ConceptTest {
 					}
 					if (!StringUtils.isBlank(nextLine[8])) {
 						Ro family = new Ro(familyCodeAttributeConcept, nextLine[8]);
-						lu.buildGroup(familyConcept, familySpecies, family, species);
+						lu.buildHierarchy(familyConcept, familySpecies, family, species);
 						if (order != null) {
-							lu.buildGroup(orderConcept, orderFamily, order, family);
+							lu.buildHierarchy(orderConcept, orderFamily, order, family);
 						}
 					}
 
 					if (!StringUtils.isBlank(nextLine[0])) {
 						Ro iscaapGroup = new Ro(iscaapGroupCodeAttributeConcept, nextLine[0]);
-						lu.buildGroup(iscaapGroupConcept, iscaapGroupSpecies, iscaapGroup, species);
+						lu.buildHierarchy(iscaapGroupConcept, iscaapGroupSpecies, iscaapGroup, species);
 					}
 
 				}

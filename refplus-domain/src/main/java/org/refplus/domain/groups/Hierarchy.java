@@ -3,15 +3,15 @@ package org.refplus.domain.groups;
 import java.util.HashMap;
 import java.util.Map;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import org.refplus.domain.core.Concept;
 import org.refplus.domain.core.Ro;
 import org.refplus.domain.core.SingleCoded;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
- * A group is a holder of links.
+ * A hierarchy is a holder of groups.
  * 
  * 
  * 
@@ -20,14 +20,14 @@ import org.refplus.domain.core.SingleCoded;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Group extends SingleCoded {
+public class Hierarchy extends SingleCoded {
 
 	private Concept source;
 	private Concept target;
 
 	private Map<Ro, Link> map;
 
-	public Group(Concept source, Concept target) {
+	public Hierarchy(Concept source, Concept target) {
 		super();
 		this.source = source;
 		this.target = target;
