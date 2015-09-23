@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<!-- maximumPoolSize is 2 because the integration tests with above 2 do not run because Oracle starts complaining. This could however 
+		be different in qa or prod. It looks like this problem only appears on the FIGIS dev Oracle 10 DB. ORA-02391: exceeded simultaneous 
+		SESSIONS_PER_USER limit with also this message Timeout of 30000ms encountered waiting for connection. -->
+
+
+	<persistence-unit name="vme-persistence">
+		<class>org.fao.fi.vme.domain.model.Authority</class>
+		<class>org.fao.fi.vme.domain.model.GeneralMeasure</class>
+		<class>org.fao.fi.vme.domain.model.GeoRef</class>
+		<class>org.fao.fi.vme.domain.model.History</class>
+		<class>org.fao.fi.vme.domain.model.FisheryAreasHistory</class>
+		<class>org.fao.fi.vme.domain.model.VMEsHistory</class>
+		<class>org.fao.fi.vme.domain.model.InformationSource</class>
+		<class>org.fao.fi.vme.domain.model.MultiLingualString</class>
+		<class>org.fao.fi.vme.domain.model.Profile</class>
+		<class>org.fao.fi.vme.domain.model.Rfmo</class>
+		<class>org.fao.fi.vme.domain.model.SpecificMeasure</class>
+		<class>org.fao.fi.vme.domain.model.Vme</class>
+		<class>org.fao.fi.vme.domain.model.MediaReference</class>
+		<class>org.fao.fi.vme.domain.model.reference.VmeCriteria</class>
+		<class>org.fao.fi.vme.domain.model.reference.VmeType</class>
+		<class>org.fao.fi.vme.domain.model.reference.InformationSourceType</class>
+		<class>org.fao.fi.vme.domain.model.reference.VmeScope</class>
+		<class>org.fao.fi.vme.domain.model.reference.MediaType</class>
+
+
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="${javax.persistence.jdbc.driver.vme}" />
+			<property name="javax.persistence.jdbc.url" value="${javax.persistence.jdbc.url.vme}" />
+			<property name="javax.persistence.jdbc.user" value="${javax.persistence.jdbc.user.vme}" />
+			<property name="javax.persistence.jdbc.password" value="${javax.persistence.jdbc.password.vme}" />
+
+			<property name="show_sql" value="false" />
+
+			<property name="hibernate.hbm2ddl.auto" value="${hibernate.hbm2ddl.auto.vme}" />
+			<property name="hibernate.dialect" value="${hibernate.dialect.vme}" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.ejb.entitymanager_factory_name" value="vme_entitymanager_factory_name" />
+			<property name="hibernate.default_schema" value="${hibernate.default.schema.vme}" />
+
+			<!-- this setting prevents hibernate from doing too many left outer joins, generating too many specificMeasures on a Vme -->
+			<property name="hibernate.max_fetch_depth" value="0" />
+
+
+
+
+
+			<!-- HikariCP custom properties -->
+			<property name="hibernate.connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider" />
+			<property name="hibernate.hikari.maximumPoolSize" value="2" />
+			<!-- so that connections are retired while the database is offline 1200000ms=20min -->
+			<property name="hibernate.hikari.maxLifetime" value="1200000" />
+			<property name="hibernate.hikari.jdbc4ConnectionTest" value="false" />
+			<property name="hibernate.hikari.connectionTestQuery" value="SELECT * FROM DUAL" />
+
+		</properties>
+	</persistence-unit>
+
+
+
+	<persistence-unit name="figis-persistence">
+		<!-- reference tables -->
+		<class>org.fao.fi.figis.domain.RefVme</class>
+		<class>org.fao.fi.figis.domain.RefWaterArea</class>
+
+		<!-- factsheet tables -->
+		<class>org.fao.fi.figis.domain.VmeObservation</class>
+		<class>org.fao.fi.figis.domain.Observation</class>
+		<class>org.fao.fi.figis.domain.ObservationXml</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="${javax.persistence.jdbc.driver.figis}" />
+			<property name="javax.persistence.jdbc.url" value="${javax.persistence.jdbc.url.figis}" />
+			<property name="javax.persistence.jdbc.user" value="${javax.persistence.jdbc.user.figis}" />
+			<property name="javax.persistence.jdbc.password" value="${javax.persistence.jdbc.password.figis}" />
+
+			<property name="show_sql" value="false" />
+
+			<property name="hibernate.hbm2ddl.auto" value="${hibernate.hbm2ddl.auto.figis}" />
+			<property name="hibernate.dialect" value="${hibernate.dialect.figis}" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.ejb.entitymanager_factory_name" value="figis_entitymanager_factory_name" />
+			<property name="hibernate.default_schema" value="FIGIS" />
+
+
+			<!-- HikariCP custom properties -->
+			<property name="hibernate.connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider" />
+			<property name="hibernate.hikari.maximumPoolSize" value="2" />
+
+
+		</properties>
+	</persistence-unit>
+
+
+</persistence>

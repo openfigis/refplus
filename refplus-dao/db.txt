@@ -1,0 +1,7 @@
+user=refplususer
+pw=refplususer
+db=refplus
+url=jdbc:postgresql://hqldvfigis1.hq.un.fao.org/postgres
+schema=refplus
+
+
