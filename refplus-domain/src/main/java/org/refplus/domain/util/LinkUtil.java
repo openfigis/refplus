@@ -1,11 +1,11 @@
 package org.refplus.domain.util;
 
 import org.apache.commons.lang.StringUtils;
+import org.refplus.domain.Concept;
+import org.refplus.domain.Hierarchy;
 import org.refplus.domain.core.AttributeDefinition;
-import org.refplus.domain.core.Concept;
+import org.refplus.domain.core.Group;
 import org.refplus.domain.core.Ro;
-import org.refplus.domain.groups.Hierarchy;
-import org.refplus.domain.groups.Group;
 
 public class LinkUtil {
 

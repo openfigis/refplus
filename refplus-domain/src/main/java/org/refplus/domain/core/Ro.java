@@ -2,6 +2,9 @@ package org.refplus.domain.core;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+
+import org.refplus.domain.Hierarchy;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,6 +34,9 @@ public class Ro {
 	 * * AttributeConcept = {name, longName, code, value}
 	 */
 	private Map<AttributeDefinition, Attribute> attributeMap;
+	private Map<Hierarchy, Group> groups;
+
+	private Set<Group> buckets;
 
 	public Ro(AttributeDefinition codeAttributeConcept, Code code, AttributeDefinition mlsAttributeConcept,
 			MultiLingualString mls) {

@@ -9,6 +9,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false, of = "code")
 public class Code extends Attribute {
 
+	private Long id;
+
 	private String code;
 
 }

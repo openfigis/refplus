@@ -1,9 +1,9 @@
-package org.refplus.domain.groups;
+package org.refplus.domain;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.refplus.domain.core.Concept;
+import org.refplus.domain.core.Group;
 import org.refplus.domain.core.Ro;
 import org.refplus.domain.core.SingleCoded;
 
@@ -21,6 +21,9 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Hierarchy extends SingleCoded {
+
+	// @Id
+	private Long id;
 
 	private Concept source;
 	private Concept target;

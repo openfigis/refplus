@@ -18,9 +18,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class MultiLingualString extends Attribute implements Serializable {
 
+	// @Id
 	private Long id;
 
-	private Map<Integer, String> stringMap;
+	private Map<String, String> stringMap;
 
 	private static final long serialVersionUID = -6780225288480597193L;
 

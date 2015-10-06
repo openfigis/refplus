@@ -1,9 +1,7 @@
-package org.refplus.domain.groups;
+package org.refplus.domain.core;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import org.refplus.domain.core.Ro;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,8 +10,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * 
- * A Group contains the Ros being part of the same hierarchical element. Examples of links are: Countries of the
- * continent Europe. Species of a particular family.
+ * A Group contains the members. Examples of groups are: Countries of the continent Europe. Species of a particular
+ * family.
  * 
  * 
  * 
@@ -27,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class Group {
 
 	/**
-	 * Constructor to create a link with already a first element.
+	 * Constructor to create a Group with already a first member.
 	 */
 	public Group(Ro destination) {
 		memberSet = new HashSet<Ro>();
@@ -35,7 +33,7 @@ public class Group {
 	}
 
 	/**
-	 * All the Members of this link
+	 * All the Members of this Group
 	 */
 	private Set<Ro> memberSet;
 

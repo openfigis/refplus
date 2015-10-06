@@ -1,7 +1,5 @@
 package org.refplus.domain.core;
 
-import java.util.List;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -10,12 +8,13 @@ import lombok.EqualsAndHashCode;
 public abstract class SingleCoded {
 
 	/**
-	 * The code for this object. It is not foreseen to have multiple codes.
+	 * The code for this object. It is not foreseen to have multiple codes. It is the string used to identify this
+	 * object in the REST-API
 	 */
-	protected Code conceptCode;
+	private String code;
 
 	/**
 	 * The names in different languages for this object.
 	 */
-	protected List<MultiLingualString> name;
+	private MultiLingualString name;
 }

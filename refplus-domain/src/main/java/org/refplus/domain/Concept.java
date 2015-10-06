@@ -1,6 +1,10 @@
-package org.refplus.domain.core;
+package org.refplus.domain;
 
 import java.util.Vector;
+
+import org.refplus.domain.core.AttributeDefinition;
+import org.refplus.domain.core.Ro;
+import org.refplus.domain.core.SingleCoded;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +21,9 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Concept extends SingleCoded {
+
+	// @Id
+	private Long id;
 
 	/**
 	 * The instances of a concept, or in RefPlus terms, the reference objects of a concept. If the concept is Country,
