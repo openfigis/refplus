@@ -26,7 +26,7 @@ public class MultiLingualStringUtil {
 
 	public MultiLingualString english(String text) {
 		MultiLingualString l = new MultiLingualString();
-		Map<Integer, String> stringMap = new HashMap<Integer, String>();
+		Map<String, String> stringMap = new HashMap<String, String>();
 		stringMap.put(Lang.EN, text);
 		l.setStringMap(stringMap);
 		return l;
@@ -69,7 +69,8 @@ public class MultiLingualStringUtil {
 		}
 
 		// if (destination.getStringMap() == null || destination.getStringMap().get(Lang.EN) == null) {
-		// ("The MultiLingualString did not contain any text, it should contain it in order to be able to be replaced. StringMap == "
+		// ("The MultiLingualString did not contain any text, it should contain it in order to be able to be replaced.
+		// StringMap == "
 		// + destination.getStringMap() + ".");
 		// }
 	}
@@ -86,7 +87,8 @@ public class MultiLingualStringUtil {
 	public void copyMultiLingual(Object source, Object destination) {
 		Method[] methods = source.getClass().getMethods();
 		for (Method getMethod : methods) {
-			if (getMethod.getReturnType().equals(MultiLingualString.class) && getMethod.getParameterTypes().length == 0) {
+			if (getMethod.getReturnType().equals(MultiLingualString.class)
+					&& getMethod.getParameterTypes().length == 0) {
 				for (Method setMethod : methods) {
 					if (getMethod.getName().substring(XET).equals(setMethod.getName().substring(XET))
 							&& setMethod.getParameterTypes().length == LENGTH
@@ -120,7 +122,7 @@ public class MultiLingualStringUtil {
 		mls.getStringMap().put(Lang.ES, text);
 	}
 
-	public void addLanguage(Integer language, MultiLingualString mls, String text) {
+	public void addLanguage(String language, MultiLingualString mls, String text) {
 		mls.getStringMap().put(Lang.ES, text);
 	}
 

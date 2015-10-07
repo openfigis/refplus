@@ -55,22 +55,22 @@ public class ConceptTest {
 		AttributeDefinition subUnitAttributeConcept = new AttributeDefinition();
 		Vector<AttributeDefinition> attibuteDefinitionList = new Vector<AttributeDefinition>();
 		attibuteDefinitionList.add(subUnitAttributeConcept);
-		Concept subunitConcept = new Concept(new Vector<Ro>(), attibuteDefinitionList);
+		Concept subunitConcept = new Concept(0l, new Vector<Ro>(), attibuteDefinitionList);
 
 		AttributeDefinition subDivisionAttributeConcept = new AttributeDefinition();
 		Vector<AttributeDefinition> subDivisionAttributeDefinitionList = new Vector<AttributeDefinition>();
 		subDivisionAttributeDefinitionList.add(subDivisionAttributeConcept);
-		Concept subDivisionConcept = new Concept(new Vector<Ro>(), subDivisionAttributeDefinitionList);
+		Concept subDivisionConcept = new Concept(0l, new Vector<Ro>(), subDivisionAttributeDefinitionList);
 
 		AttributeDefinition subAreaAttributeConcept = new AttributeDefinition();
 		Vector<AttributeDefinition> subAreaAttributeDefinitionList = new Vector<AttributeDefinition>();
 		subDivisionAttributeDefinitionList.add(subAreaAttributeConcept);
-		Concept subAreaConcept = new Concept(new Vector<Ro>(), subAreaAttributeDefinitionList);
+		Concept subAreaConcept = new Concept(0l, new Vector<Ro>(), subAreaAttributeDefinitionList);
 
 		AttributeDefinition majorAreaAttributeConcept = new AttributeDefinition();
 		Vector<AttributeDefinition> majorAreaAttributeDefinitionList = new Vector<AttributeDefinition>();
 		majorAreaAttributeDefinitionList.add(majorAreaAttributeConcept);
-		Concept majorAreaConcept = new Concept(new Vector<Ro>(), majorAreaAttributeDefinitionList);
+		Concept majorAreaConcept = new Concept(0l, new Vector<Ro>(), majorAreaAttributeDefinitionList);
 
 		Hierarchy subDivisionSubUnit = new Hierarchy(subDivisionConcept, subunitConcept);
 		Hierarchy subAreaSubDivision = new Hierarchy(subDivisionConcept, subAreaConcept);
@@ -157,24 +157,24 @@ public class ConceptTest {
 		AttributeDefinition alpha3CodeConcept = new AttributeDefinition();
 		Vector<AttributeDefinition> alpha3List = new Vector<AttributeDefinition>();
 		alpha3List.add(alpha3CodeConcept);
-		Concept speciesConcept = new Concept(new Vector<Ro>(), alpha3List);
+		Concept speciesConcept = new Concept(0l, new Vector<Ro>(), alpha3List);
 
 		AttributeDefinition asfisDescriptionConcept = new AttributeDefinition();
 
 		AttributeDefinition familyCodeAttributeConcept = new AttributeDefinition();
 		Vector<AttributeDefinition> familyList = new Vector<AttributeDefinition>();
 		familyList.add(familyCodeAttributeConcept);
-		Concept familyConcept = new Concept(new Vector<Ro>(), familyList);
+		Concept familyConcept = new Concept(0l, new Vector<Ro>(), familyList);
 
 		AttributeDefinition orderCodeAttributeConcept = new AttributeDefinition();
 		Vector<AttributeDefinition> orderList = new Vector<AttributeDefinition>();
 		orderList.add(orderCodeAttributeConcept);
-		Concept orderConcept = new Concept(new Vector<Ro>(), orderList);
+		Concept orderConcept = new Concept(0l, new Vector<Ro>(), orderList);
 
 		AttributeDefinition iscaapGroupCodeAttributeConcept = new AttributeDefinition();
 		Vector<AttributeDefinition> iscaapGroupList = new Vector<AttributeDefinition>();
 		iscaapGroupList.add(iscaapGroupCodeAttributeConcept);
-		Concept iscaapGroupConcept = new Concept(new Vector<Ro>(), iscaapGroupList);
+		Concept iscaapGroupConcept = new Concept(0l, new Vector<Ro>(), iscaapGroupList);
 
 		Hierarchy familySpecies = new Hierarchy(familyConcept, speciesConcept);
 		Hierarchy orderFamily = new Hierarchy(orderConcept, familyConcept);

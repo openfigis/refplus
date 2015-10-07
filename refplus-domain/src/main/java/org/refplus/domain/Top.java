@@ -20,7 +20,7 @@ public class Top {
 
 	private Vector<Hierarchy> hierarchyList = new Vector<Hierarchy>();
 
-	private Vector<Group> Bucket = new Vector<Hierarchy>();
+	private Vector<Group> bucketList = new Vector<Group>();
 
 	private Vector<Concept> conceptList = new Vector<Concept>();
 

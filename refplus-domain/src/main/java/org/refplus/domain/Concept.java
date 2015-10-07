@@ -9,6 +9,7 @@ import org.refplus.domain.core.SingleCoded;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * A Concept. Can be a country, species, city, whatever
@@ -17,7 +18,9 @@ import lombok.EqualsAndHashCode;
  * @author Erik van Ingen
  *
  */
+
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Concept extends SingleCoded {
