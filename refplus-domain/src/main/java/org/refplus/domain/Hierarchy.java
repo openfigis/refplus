@@ -3,6 +3,8 @@ package org.refplus.domain;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.Id;
+
 import org.refplus.domain.core.Group;
 import org.refplus.domain.core.Ro;
 import org.refplus.domain.core.SingleCoded;
@@ -22,7 +24,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class Hierarchy extends SingleCoded {
 
-	// @Id
+	@Id
 	private Long id;
 
 	private Concept source;

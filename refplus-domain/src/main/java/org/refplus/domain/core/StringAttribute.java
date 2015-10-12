@@ -1,5 +1,7 @@
 package org.refplus.domain.core;
 
+import javax.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,6 +19,9 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false, of = "value")
 public class StringAttribute extends Attribute {
+
+	@Id
+	private Long id;
 
 	private String value;
 

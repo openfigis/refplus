@@ -2,6 +2,8 @@ package org.refplus.domain;
 
 import java.util.Vector;
 
+import javax.persistence.Id;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,6 +17,9 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode
 public class Top {
+
+	@Id
+	private Long id;
 
 	private Vector<Hierarchy> hierarchyList = new Vector<Hierarchy>();
 

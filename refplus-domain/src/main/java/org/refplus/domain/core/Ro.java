@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.Id;
+
 import org.refplus.domain.Bucket;
 import org.refplus.domain.Concept;
 import org.refplus.domain.Hierarchy;
@@ -23,6 +25,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Ro {
+
+	@Id
+	private Long id;
+
+	public Ro(AttributeDefinition codeAttributeConcept, Code code, AttributeDefinition mlsAttributeConcept,
+			MultiLingualString mls) {
+		attributeMap = new HashMap<AttributeDefinition, Attribute>();
+		attributeMap.put(codeAttributeConcept, code);
+		attributeMap.put(mlsAttributeConcept, mls);
+	}
+
+	public Ro(AttributeDefinition codeAttributeConcept, String code) {
+		Code codeObject = new Code(0l, code);
+		attributeMap = new HashMap<AttributeDefinition, Attribute>();
+		attributeMap.put(codeAttributeConcept, codeObject);
+	}
 
 	/**
 	 * 
@@ -57,18 +75,5 @@ public class Ro {
 	 * the concepts where this Ro is part of this is to model the OneToMany relation
 	 */
 	private Set<Concept> concepts;
-
-	public Ro(AttributeDefinition codeAttributeConcept, Code code, AttributeDefinition mlsAttributeConcept,
-			MultiLingualString mls) {
-		attributeMap = new HashMap<AttributeDefinition, Attribute>();
-		attributeMap.put(codeAttributeConcept, code);
-		attributeMap.put(mlsAttributeConcept, mls);
-	}
-
-	public Ro(AttributeDefinition codeAttributeConcept, String code) {
-		Code codeObject = new Code(0l, code);
-		attributeMap = new HashMap<AttributeDefinition, Attribute>();
-		attributeMap.put(codeAttributeConcept, codeObject);
-	}
 
 }

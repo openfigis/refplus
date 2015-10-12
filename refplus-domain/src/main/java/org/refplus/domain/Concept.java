@@ -2,6 +2,8 @@ package org.refplus.domain;
 
 import java.util.Vector;
 
+import javax.persistence.Id;
+
 import org.refplus.domain.core.AttributeDefinition;
 import org.refplus.domain.core.Ro;
 import org.refplus.domain.core.SingleCoded;
@@ -25,7 +27,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class Concept extends SingleCoded {
 
-	// @Id
+	@Id
 	private Long id;
 
 	/**

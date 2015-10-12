@@ -1,5 +1,7 @@
 package org.refplus.domain;
 
+import javax.persistence.Id;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,5 +15,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Bucket extends Concept {
+
+	@Id
+	private Long id;
 
 }

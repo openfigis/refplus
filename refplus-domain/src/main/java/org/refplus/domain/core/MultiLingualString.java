@@ -3,6 +3,8 @@ package org.refplus.domain.core;
 import java.io.Serializable;
 import java.util.Map;
 
+import javax.persistence.Id;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -18,7 +20,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class MultiLingualString extends Attribute implements Serializable {
 
-	// @Id
+	@Id
 	private Long id;
 
 	private Map<String, String> stringMap;

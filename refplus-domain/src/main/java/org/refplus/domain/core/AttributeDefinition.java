@@ -1,5 +1,7 @@
 package org.refplus.domain.core;
 
+import javax.persistence.Id;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -7,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class AttributeDefinition extends SingleCoded {
 
-	// @Id
+	@Id
 	private Long id;
 
 	private Class<Attribute> attributeType;
