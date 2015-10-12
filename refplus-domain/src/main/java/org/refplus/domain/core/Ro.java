@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.refplus.domain.Bucket;
 import org.refplus.domain.Concept;
 import org.refplus.domain.Hierarchy;
 
@@ -50,7 +51,7 @@ public class Ro {
 	/**
 	 * the buckets where this Ro is part of this is to model the OneToMany relation
 	 */
-	private Set<Group> buckets;
+	private Set<Bucket> buckets;
 
 	/**
 	 * the concepts where this Ro is part of this is to model the OneToMany relation
@@ -65,7 +66,7 @@ public class Ro {
 	}
 
 	public Ro(AttributeDefinition codeAttributeConcept, String code) {
-		Code codeObject = new Code(code);
+		Code codeObject = new Code(0l, code);
 		attributeMap = new HashMap<AttributeDefinition, Attribute>();
 		attributeMap.put(codeAttributeConcept, codeObject);
 	}

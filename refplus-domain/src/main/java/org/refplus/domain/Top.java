@@ -2,8 +2,6 @@ package org.refplus.domain;
 
 import java.util.Vector;
 
-import org.refplus.domain.core.Group;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,7 +18,7 @@ public class Top {
 
 	private Vector<Hierarchy> hierarchyList = new Vector<Hierarchy>();
 
-	private Vector<Group> bucketList = new Vector<Group>();
+	private Vector<Bucket> bucketList = new Vector<Bucket>();
 
 	private Vector<Concept> conceptList = new Vector<Concept>();
 

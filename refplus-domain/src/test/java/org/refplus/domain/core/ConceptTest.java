@@ -191,7 +191,7 @@ public class ConceptTest {
 
 				if (!StringUtils.isBlank(nextLine[2])) {
 
-					Code alpha3 = new Code(nextLine[2]);
+					Code alpha3 = new Code(0l, nextLine[2]);
 
 					MultiLingualString mls = u.english(nextLine[4]);
 					u.addLanguage(Lang.FR, mls, nextLine[5]);
