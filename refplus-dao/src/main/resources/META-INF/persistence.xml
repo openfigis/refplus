@@ -1,0 +1,30 @@
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<persistence-unit name="refplus-persistence">
+
+		<class>org.refplus.domain.core.Code</class>
+		<properties>
+			<property name="show_sql" value="false" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.ejb.entitymanager_factory_name"
+				value="refplus_entitymanager_factory_name" />
+
+			<!-- this setting prevents hibernate from doing too many left outer joins, 
+				generating too many specificMeasures on an object -->
+			<property name="hibernate.max_fetch_depth" value="0" />
+
+			<!-- HikariCP custom properties -->
+			<property name="hibernate.connection.provider_class"
+				value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider" />
+			<property name="hibernate.hikari.maximumPoolSize" value="2" />
+
+			<!-- so that connections are retired while the database is offline 1200000ms=20min -->
+			<property name="hibernate.hikari.maxLifetime" value="1200000" />
+			<property name="hibernate.hikari.jdbc4ConnectionTest" value="false" />
+			<property name="hibernate.hikari.connectionTestQuery" value="SELECT * FROM DUAL" />
+
+		</properties>
+	</persistence-unit>
+</persistence>

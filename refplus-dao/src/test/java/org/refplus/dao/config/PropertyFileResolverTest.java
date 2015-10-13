@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(CdiRunner.class)
-// @AdditionalClasses(PropertyFileResolver.class)
 public class PropertyFileResolverTest {
 
 	@Inject

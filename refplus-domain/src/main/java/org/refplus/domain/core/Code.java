@@ -1,5 +1,6 @@
 package org.refplus.domain.core;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false, of = "code")
+@Entity
 public class Code extends Attribute {
 
 	@Id
