@@ -23,8 +23,8 @@ public class PropertyFileResolverTest {
 
 	@Test
 	public void test() {
-		assertEquals("geluk", p.getProperties().get("dbname"));
-		assertEquals("geheim", p.getProperties().get("dbpassword"));
+		assertEquals("org.postgresql.Driver", p.getProperties().get("javax.persistence.jdbc.driver"));
+		assertEquals("refplususer", p.getProperties().get("javax.persistence.jdbc.user"));
 
 	}
 
