@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Singleton;
 
 import org.refplus.RefPlusException;
 
@@ -20,7 +19,6 @@ import org.refplus.RefPlusException;
  *
  */
 
-@Singleton
 public class PropertyFileResolver {
 
 	public static final String LOCATION_NAME = "LOCATION_NAME";
@@ -28,8 +26,8 @@ public class PropertyFileResolver {
 
 	private Map<String, String> properties = new HashMap<String, String>();
 
-	public String getProperty(String key) {
-		return properties.get(key);
+	public Map<String, String> getProperties() {
+		return properties;
 	}
 
 	@PostConstruct

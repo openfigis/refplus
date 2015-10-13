@@ -1,10 +1,8 @@
 package org.refplus.dao.config;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -16,15 +14,14 @@ public class EntityManagerProducer {
 
 	protected static Logger LOG = LoggerFactory.getLogger(EntityManagerProducer.class);
 
+	@Inject
+	private PropertyFileResolver propertyFileResolver;
+
 	@Produces
 	@ApplicationScoped
 	private EntityManager getEntityManager() {
-
-		Map<String, String> dbProps = new HashMap<String, String>();
-
-		dbProps.put("eclipselink.logging.level", "");
-
-		EntityManagerFactory fact = Persistence.createEntityManagerFactory("refplus-persistence", dbProps);
+		EntityManagerFactory fact = Persistence.createEntityManagerFactory("refplus-persistence",
+				propertyFileResolver.getProperties());
 		return fact.createEntityManager();
 	}
 

@@ -23,8 +23,8 @@ public class PropertyFileResolverTest {
 
 	@Test
 	public void test() {
-		assertEquals("geluk", p.getProperty("dbname"));
-		assertEquals("geheim", p.getProperty("dbpassword"));
+		assertEquals("geluk", p.getProperties().get("dbname"));
+		assertEquals("geheim", p.getProperties().get("dbpassword"));
 
 	}
 
