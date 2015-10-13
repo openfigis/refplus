@@ -17,20 +17,15 @@ public class EntityManagerProducer {
 	protected static Logger LOG = LoggerFactory.getLogger(EntityManagerProducer.class);
 
 	@Produces
+	@ApplicationScoped
 	private EntityManager getEntityManager() {
 
 		Map<String, String> dbProps = new HashMap<String, String>();
 
 		dbProps.put("eclipselink.logging.level", "");
 
-		EntityManagerFactory fact = Persistence.createEntityManagerFactory("myTestPU", dbProps);
+		EntityManagerFactory fact = Persistence.createEntityManagerFactory("refplus-persistence", dbProps);
 		return fact.createEntityManager();
-	}
-
-	@Produces
-	@ApplicationScoped
-	public EntityManager produceEntityManager() {
-		return Persistence.createEntityManagerFactory("refplus-persistence").createEntityManager();
 	}
 
 }

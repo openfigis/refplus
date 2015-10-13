@@ -10,15 +10,24 @@ import java.util.Properties;
 import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 
+import org.refplus.RefPlusException;
+
 @Singleton
 public class PropertyFileResolver {
 
-	private Map<String, String> properties = new HashMap<>();
+	public static final String LOCATION_NAME = "LOCATION_NAME";
+	public static final String FILE_NAME = "refplus-db.properties";
+
+	private Map<String, String> properties = new HashMap<String, String>();
 
 	@PostConstruct
 	private void init() throws IOException {
-		String propertyFile = System.getProperty("refplus.properties");
-		File file = new File(propertyFile);
+		String propertyFile = System.getProperty(LOCATION_NAME);
+		if (propertyFile == null) {
+			throw new RefPlusException(LOCATION_NAME + " not properly set (system property)");
+		}
+		File file = new File(propertyFile + File.separator + FILE_NAME);
+
 		Properties properties = new Properties();
 		try {
 			properties.load(new FileInputStream(file));
