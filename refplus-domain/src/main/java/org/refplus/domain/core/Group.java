@@ -3,8 +3,10 @@ package org.refplus.domain.core;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +27,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Entity
 public class Group {
 
 	@Id
@@ -42,6 +45,7 @@ public class Group {
 	/**
 	 * All the Members of this Group
 	 */
+	@OneToMany
 	private Set<Ro> memberSet;
 
 }

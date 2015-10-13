@@ -1,11 +1,12 @@
 package org.refplus.domain.core;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Example of use are the latin name of species. The latin names are not always unique and can therefore not be
@@ -17,14 +18,13 @@ import lombok.EqualsAndHashCode;
  */
 
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false, of = "value")
+@Entity
 public class StringAttribute extends Attribute {
 
-	@Id
-	@GeneratedValue
-	private Long id;
-
+	@NonNull
 	private String value;
 
 }

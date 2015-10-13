@@ -12,6 +12,12 @@
 		<class>org.refplus.domain.core.SingleCoded</class>
 		<class>org.refplus.domain.core.StringAttribute</class>
 
+		<class>org.refplus.domain.Bucket</class>
+		<class>org.refplus.domain.Concept</class>
+		<class>org.refplus.domain.Hierarchy</class>
+		<class>org.refplus.domain.Top</class>
+
+
 		<properties>
 			<property name="show_sql" value="false" />
 			<property name="hibernate.show_sql" value="false" />

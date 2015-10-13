@@ -1,21 +1,30 @@
 package org.refplus.domain.core;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+@RequiredArgsConstructor
+@Entity
 public class AttributeDefinition extends SingleCoded {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 
-	private Class<Attribute> attributeType;
+	@NonNull
+	private Class<? extends Attribute> attributeType;
 
+	@NonNull
 	private String inputSchema;
 	/*
 	 * // private boolean is_A_Code = false; // private String attr_Type = null;

@@ -2,13 +2,14 @@ package org.refplus.domain.core;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-import org.refplus.domain.Bucket;
-import org.refplus.domain.Concept;
 import org.refplus.domain.Hierarchy;
 
 import lombok.Data;
@@ -25,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode
+@Entity
 public class Ro {
 
 	@Id
@@ -59,6 +61,9 @@ public class Ro {
 	/**
 	 * the attributes for this Ro
 	 */
+	@ElementCollection
+	@CollectionTable(name = "attributeMap")
+	@OneToMany
 	private Map<AttributeDefinition, Attribute> attributeMap;
 
 	/**
@@ -66,16 +71,19 @@ public class Ro {
 	 * a hierarchy example: Ro(country:<Italy>) has a Hierarchy (GAUL) with member <Lazio>, and a Hierarchy (city) with
 	 * member <Rome>
 	 */
+	@OneToMany
 	private Map<Hierarchy, Group> groups;
 
 	/**
 	 * the buckets where this Ro is part of this is to model the OneToMany relation
 	 */
-	private Set<Bucket> buckets;
+	// @OneToMany
+	// private Set<Bucket> buckets;
 
 	/**
 	 * the concepts where this Ro is part of this is to model the OneToMany relation
 	 */
-	private Set<Concept> concepts;
+	// @OneToMany
+	// private Set<Concept> concepts;
 
 }
