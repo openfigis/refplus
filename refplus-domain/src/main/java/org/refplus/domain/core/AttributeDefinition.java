@@ -1,5 +1,6 @@
 package org.refplus.domain.core;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import lombok.Data;
@@ -10,6 +11,7 @@ import lombok.EqualsAndHashCode;
 public class AttributeDefinition extends SingleCoded {
 
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	private Class<Attribute> attributeType;

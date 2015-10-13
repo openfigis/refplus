@@ -4,7 +4,14 @@
 
 	<persistence-unit name="refplus-persistence">
 
+		<class>org.refplus.domain.core.AttributeDefinition</class>
 		<class>org.refplus.domain.core.Code</class>
+		<class>org.refplus.domain.core.Group</class>
+		<class>org.refplus.domain.core.MultiLingualString</class>
+		<class>org.refplus.domain.core.Ro</class>
+		<class>org.refplus.domain.core.SingleCoded</class>
+		<class>org.refplus.domain.core.StringAttribute</class>
+
 		<properties>
 			<property name="show_sql" value="false" />
 			<property name="hibernate.show_sql" value="false" />

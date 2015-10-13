@@ -3,6 +3,7 @@ package org.refplus.domain.core;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +28,7 @@ import lombok.NoArgsConstructor;
 public class Group {
 
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	/**

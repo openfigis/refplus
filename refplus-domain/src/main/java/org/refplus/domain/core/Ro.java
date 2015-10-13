@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.refplus.domain.Bucket;
@@ -27,6 +28,7 @@ import lombok.NoArgsConstructor;
 public class Ro {
 
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	public Ro(AttributeDefinition codeAttributeConcept, Code code, AttributeDefinition mlsAttributeConcept,
@@ -37,7 +39,7 @@ public class Ro {
 	}
 
 	public Ro(AttributeDefinition codeAttributeConcept, String code) {
-		Code codeObject = new Code(0l, code);
+		Code codeObject = new Code(code);
 		attributeMap = new HashMap<AttributeDefinition, Attribute>();
 		attributeMap.put(codeAttributeConcept, codeObject);
 	}

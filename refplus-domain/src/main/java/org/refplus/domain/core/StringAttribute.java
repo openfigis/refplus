@@ -1,5 +1,6 @@
 package org.refplus.domain.core;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ import lombok.EqualsAndHashCode;
 public class StringAttribute extends Attribute {
 
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	private String value;
